@@ -75,6 +75,7 @@ public class MainMenu {
 			public void actionPerformed(ActionEvent e) {
 				
 				mainFrame.remove(startPanel);
+				
 				squadSelectionMenu(Player.p1, 0);
 			}
 		});
@@ -709,7 +710,7 @@ public class MainMenu {
 		}
 	}
 	
-	public Font applyPokemonFont(float size) {
+	public static Font applyPokemonFont(float size) {
 		try {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			Font fireRed = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/pokemon_fire_red.ttf"));
