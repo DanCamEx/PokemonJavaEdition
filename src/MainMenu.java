@@ -4,7 +4,9 @@ import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -43,12 +45,15 @@ public class MainMenu {
 	//GUI IMPLEMENTATION
 	public MainMenu() {
 		
-		mainFrame.setTitle("Pokémon");
+		mainFrame.setTitle("Pokémon Java Version");
 		mainFrame.setSize(1296, 759);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setResizable(false);
 		mainFrame.setLayout(new GridBagLayout());
+		
+		Image gameIcon = Toolkit.getDefaultToolkit().getImage("src/images/gameIcon.png");
+		mainFrame.setIconImage(gameIcon);
 		
 		JPanel startPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -66,7 +71,7 @@ public class MainMenu {
 		gbc.insets = new Insets(0, 0, 80, 0);
 		startPanel.add(title, gbc);
 		
-		JButton startButton = new JButton("   Start   ");
+		JButton startButton = new JButton("    Start    ");
 		startButton.setFont(applyPokemonFont(30f));
 		startButton.setBackground(Color.WHITE);
 		gbc.insets = new Insets(150, 0, 0, 0);
@@ -74,17 +79,27 @@ public class MainMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				mainFrame.remove(startPanel);
-				
-				squadSelectionMenu(Player.p1, 0);
+//				if (LoadNSave.checkIfEmpty("saves/characters")==true) {
+//					JLabel clickLoad = new JLabel("<html>You must create at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
+//					clickLoad.setFont(applyPokemonFont(30f));
+//					clickLoad.setForeground(Color.RED);
+//					gbc.insets = new Insets(150, 700, 0, 0);
+//					startPanel.add(clickLoad, gbc);
+//					updateBackground(startBackgroundLabel, startPanel);
+//					
+//				}
+//				else {
+					mainFrame.remove(startPanel);
+					squadSelectionMenu(Player.p1, 0);
+//				}
 			}
 		});
 		startPanel.add(startButton, gbc);
 		
-		JButton quitButton = new JButton("   Quit   ");
+		JButton quitButton = new JButton("      Quit      ");
 		quitButton.setFont(applyPokemonFont(30f));
 		quitButton.setBackground(Color.WHITE);
-		gbc.insets = new Insets(250, 0, 0, 0);
+		gbc.insets = new Insets(350, 0, 0, 0);
 		quitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -95,6 +110,19 @@ public class MainMenu {
 		});
 		startPanel.add(quitButton, gbc);
 		
+		JButton loadButton = new JButton("     Load     ");
+		loadButton.setFont(applyPokemonFont(30f));
+		loadButton.setBackground(Color.WHITE);
+		gbc.insets = new Insets(250, 0, 0, 0);
+		loadButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		startPanel.add(loadButton, gbc);
+		
 		updateBackground(startBackgroundLabel, startPanel);
 		
 		mainFrame.add(startPanel);
@@ -102,6 +130,16 @@ public class MainMenu {
 		mainFrame.repaint();
 		mainFrame.setVisible(true);		
 	}
+	
+	public void loadMenu() {
+		JPanel loadPanel = new JPanel();
+		
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		
+	}
+	
 	
 	public void squadSelectionMenu(Player p, int pokemonPosition) {
 		int i = pokemonPosition;
