@@ -44,5 +44,6 @@ public class PokeMove {
 	static PokeMove scratch = new PokeMove("Scratch", "normal", "physical", 40, 100, "empty", "empty");		
 	static PokeMove empty = new PokeMove("empty", "empty", "empty", 0, 0, "empty", "empty"); //placeholder
 	
+	
 	static PokeMove switchPokemon = new PokeMove("switch");
 }

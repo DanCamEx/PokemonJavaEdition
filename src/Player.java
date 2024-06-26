@@ -202,7 +202,7 @@ public class Player {
 	}
 	
 	/**
-	 * A method which reverse the player currently active during a turn or a damage calculus. It can be useful when you dont know which of the player 
+	 * A method which reverse the player currently active during a turn or a damage calculus. It can be useful when you don't know which of the player 
 	 * is the first to act during a turn, as it is determined by their current pokemon speed.
 	 * @param p
 	 * @return The other player, based on which player is inserted as the argument.

@@ -2,6 +2,7 @@ import javax.swing.ImageIcon;
 
 public class Pokemon {
 	
+	//Anvedi che tempo!
 	//Attributes
 	private ImageIcon frontSprite, backSprite;
 	private String name, type;
