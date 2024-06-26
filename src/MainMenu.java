@@ -79,19 +79,19 @@ public class MainMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-//				if (LoadNSave.checkIfEmpty("saves/characters")==true) {
-//					JLabel clickLoad = new JLabel("<html>You must create at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
-//					clickLoad.setFont(applyPokemonFont(30f));
-//					clickLoad.setForeground(Color.RED);
-//					gbc.insets = new Insets(150, 700, 0, 0);
-//					startPanel.add(clickLoad, gbc);
-//					updateBackground(startBackgroundLabel, startPanel);
-//					
-//				}
-//				else {
+				if (LoadNSave.checkIfEmpty("saves/characters")==true) {
+					JLabel clickLoad = new JLabel("<html>You must create at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
+					clickLoad.setFont(applyPokemonFont(30f));
+					clickLoad.setForeground(Color.RED);
+					gbc.insets = new Insets(150, 700, 0, 0);
+					startPanel.add(clickLoad, gbc);
+					updateBackground(startBackgroundLabel, startPanel);
+					
+				}
+				else {
 					mainFrame.remove(startPanel);
 					squadSelectionMenu(Player.p1, 0);
-//				}
+				}
 			}
 		});
 		startPanel.add(startButton, gbc);
