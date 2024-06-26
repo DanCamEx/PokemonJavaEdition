@@ -250,7 +250,7 @@ public class MainMenu {
 		fightButton.setBackground(Color.WHITE);
 		gbc.insets = new Insets(350,450,0,0);
 		battlePanel.add(fightButton, gbc);
-		if ((int)p.getCurrentPokemon().getHp()==0) {
+		if ((int)p.getCurrentPokemon().getHp()<=0) {
 			fightButton.setEnabled(false);
 		}
 		
