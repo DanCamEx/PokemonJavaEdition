@@ -145,8 +145,19 @@ public class Pokemon {
 		else {
 			return 0;
 		}
-		
 	}
+	
+	public static void resetTeam(Player p) {
+		Pokemon[] pokemonSquad = p.getPokemonSquad();
+		int index = 0;
+		for (Pokemon pk : pokemonSquad) {
+			pokemonSquad[index] = createPokemon(pk.getName());
+			index++;
+		}
+	}
+		
+		
+		
 	
 	
 	

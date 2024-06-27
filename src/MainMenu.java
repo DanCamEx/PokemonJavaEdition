@@ -42,6 +42,8 @@ public class MainMenu {
 	private int chosenPosition1;
 	private int chosenPosition2;
 	
+	private int battleCounter = 1;
+	
 	//GUI IMPLEMENTATION
 	public MainMenu() {
 		
@@ -79,19 +81,19 @@ public class MainMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if (LoadNSave.checkIfEmpty("saves/characters")==true) {
-					JLabel clickLoad = new JLabel("<html>You must create at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
-					clickLoad.setFont(applyPokemonFont(30f));
-					clickLoad.setForeground(Color.RED);
-					gbc.insets = new Insets(150, 700, 0, 0);
-					startPanel.add(clickLoad, gbc);
-					updateBackground(startBackgroundLabel, startPanel);
-					
-				}
-				else {
+//				if (LoadNSave.checkIfEmpty("saves/characters")==true) {
+//					JLabel clickLoad = new JLabel("<html>You must create at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
+//					clickLoad.setFont(applyPokemonFont(30f));
+//					clickLoad.setForeground(Color.RED);
+//					gbc.insets = new Insets(150, 700, 0, 0);
+//					startPanel.add(clickLoad, gbc);
+//					updateBackground(startBackgroundLabel, startPanel);
+//					
+//				}
+//				else {
 					mainFrame.remove(startPanel);
 					squadSelectionMenu(Player.p1, 0);
-				}
+//				}
 			}
 		});
 		startPanel.add(startButton, gbc);
@@ -244,6 +246,11 @@ public class MainMenu {
 		updatePlayerInfo(Player.p1);
 		updatePlayerInfo(Player.p2);
 		
+		JLabel battleCounterLabel = new JLabel("Match n."+battleCounter);
+		battleCounterLabel.setFont(applyPokemonFont(30f));
+		battleCounterLabel.setForeground(Color.BLACK);
+		gbc.insets = new Insets(0,0,670,1170);
+		battlePanel.add(battleCounterLabel, gbc);
 
 		JButton fightButton = new JButton("Fight");
 		fightButton.setFont(applyPokemonFont(25f));
@@ -466,41 +473,71 @@ public class MainMenu {
 			}
 		});
 		surrenderButton.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
+	
 				surrenderButton.setEnabled(false);
 				fightButton.setEnabled(false);
 				changePokemonButton.setEnabled(false);
-				JLabel loseLabel = new JLabel ("You Lose!");
-				JLabel winLabel = new JLabel ("You Win!");
-				winLabel.setFont(applyPokemonFont(70f));
-				winLabel.setForeground(Color.GREEN);
-				loseLabel.setFont(applyPokemonFont(70f));
-				loseLabel.setForeground(Color.RED);
-				if (p==Player.p2) {
-					gbc.insets = new Insets(50, 420, 0, 0);
-					gbc.gridx = 0;
-					gbc.gridy = 0;
-					battlePanel.add(loseLabel, gbc);
-					gbc.insets = new Insets(450, 0, 0, 500);
-					battlePanel.add(winLabel, gbc);
+				
+				if (battleCounter!=3) {
+					JLabel surrenderLabel = new JLabel(p.getNickname()+"  surrended!");
+					p.setLoses(p.getLoses()+1);
+					Player otherP = Player.reversePlayer(p);
+					otherP.setVictories(otherP.getVictories()+1);
+					surrenderLabel.setFont(applyPokemonFont(25f));
+					surrenderLabel.setForeground(Color.BLACK);
+					gbc.insets = new Insets(0, 0, 600, 1120);
+					battleCounter+=1;
+					Pokemon.resetTeam(p);
+					battlePanel.removeAll();
 					updateBackground(battleBackgroundLabel, battlePanel);
+					battlePanel.add(surrenderLabel, gbc);
+					choiceMenu(Player.p1);
+					
 				}
+				
 				else {
-					gbc.insets = new Insets(450, 0, 0, 500);
-					gbc.gridx = 0;
-					gbc.gridy = 0;
-					battlePanel.add(loseLabel, gbc);
-					gbc.insets = new Insets(50, 420, 0, 0);
-					battlePanel.add(winLabel, gbc);
-					updateBackground(battleBackgroundLabel, battlePanel);
+					JLabel loseLabel = new JLabel ("You Lose");
+					JLabel winLabel = new JLabel ("You Win!");
+					winLabel.setFont(applyPokemonFont(70f));
+					winLabel.setForeground(Color.GREEN);
+					loseLabel.setFont(applyPokemonFont(70f));
+					loseLabel.setForeground(Color.RED);
+					if (p==Player.p2 && p.getLoses()==2) {
+						gbc.insets = new Insets(50, 420, 0, 0);
+						gbc.gridx = 0;
+						gbc.gridy = 0;
+						battlePanel.add(loseLabel, gbc);
+						gbc.insets = new Insets(450, 0, 0, 500);
+						battlePanel.add(winLabel, gbc);
+						updateBackground(battleBackgroundLabel, battlePanel);
+						
+					}
+					else {
+						gbc.insets = new Insets(450, 0, 0, 500);
+						gbc.gridx = 0;
+						gbc.gridy = 0;
+						battlePanel.add(loseLabel, gbc);
+						gbc.insets = new Insets(50, 420, 0, 0);
+						battlePanel.add(winLabel, gbc);
+						updateBackground(battleBackgroundLabel, battlePanel);
+					}
 				}
 			}
-		
 		});
+			
+			
+		
 		
 		updateSprites();
-		updateBackground(battleBackgroundLabel, battlePanel);
+		updateBackground(
+
+
+
+
+		battleBackgroundLabel, battlePanel);
 		
 		//Frame settings
 		mainFrame.add(battlePanel);

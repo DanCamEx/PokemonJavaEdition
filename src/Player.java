@@ -16,7 +16,7 @@ public class Player {
 	/**
 	 * 
 	 */
-	private int gamesPlayed, victories, loses;
+	private int victories, loses = 0;
 	
 	/**
 	 * An array of 3 pokémon which represents the player's pokémon squad.
@@ -125,6 +125,21 @@ public class Player {
 		return currentPosition;
 	}
 	
+	
+	
+	
+	public int getVictories() {
+		return victories;
+	}
+	
+	
+	
+	
+	public int getLoses() {
+		return loses;
+	}
+	
+	
 	/**
 	 * Gets one of the two remaining positions in the array pokemonSquad, as the third is the current one and represents the current pokemon fighting in a turn.
 	 * @param position
@@ -171,6 +186,19 @@ public class Player {
 	public void setChoice(PokeMove choice) {
 		this.turnChoice = choice;
 	}
+	
+	
+	
+	
+	public void setVictories(int victories) {
+		this.victories = victories;
+	}
+	
+	
+	public void setLoses(int loses) {
+		this.loses = loses;
+	}
+	
 	
 	/**
 	 * Sets which is the current pokemon, which will appear in the battle as the active pokemon during a turn. 

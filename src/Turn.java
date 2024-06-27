@@ -40,6 +40,9 @@ public class Turn {
 		}
 		
 		double remainedHp = otherP.getCurrentPokemon().getHp() - finalDamage;
+		if (remainedHp < 0){
+			remainedHp=0;
+		}
 		
 		otherP.getCurrentPokemon().setHp(remainedHp);
 		
