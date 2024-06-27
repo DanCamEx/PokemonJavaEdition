@@ -3,6 +3,7 @@ public class JPokeBattle {
 	
 	public static void main(String[] args) {
 		
-		new MainMenu();
+		MainMenu Session = new MainMenu();
+		Session.startMenu();
 	}
 }

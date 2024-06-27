@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
@@ -19,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class MainMenu {
 	
@@ -32,12 +34,14 @@ public class MainMenu {
 	private JLabel player1Info = new JLabel();
 	private JLabel player2Info = new JLabel();
 	
-	private ImageIcon battleBackground = new ImageIcon(getClass().getResource("images/battle background.png"));
+	private ImageIcon battleBackground = new ImageIcon(getClass().getResource("images/battleBackground.png"));
 	private JLabel battleBackgroundLabel = new JLabel(battleBackground);
-	private ImageIcon startBackground = new ImageIcon(getClass().getResource("images/title.png"));
+	private ImageIcon startBackground = new ImageIcon(getClass().getResource("images/startBackground.png"));
 	private JLabel startBackgroundLabel = new JLabel(startBackground);
 	private ImageIcon squadBackground = new ImageIcon(getClass().getResource("images/chooseStarter.jpg"));
 	private JLabel squadBackgroundLabel = new JLabel(squadBackground);
+	private ImageIcon loadBackground = new ImageIcon(getClass().getResource("images/loadBackground.jpg"));
+	private JLabel loadBackgroundLabel = new JLabel(loadBackground);
 	
 	private int chosenPosition1;
 	private int chosenPosition2;
@@ -56,7 +60,9 @@ public class MainMenu {
 		
 		Image gameIcon = Toolkit.getDefaultToolkit().getImage("src/images/gameIcon.png");
 		mainFrame.setIconImage(gameIcon);
-		
+	}
+	
+	public void startMenu() {
 		JPanel startPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		
@@ -81,19 +87,19 @@ public class MainMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-//				if (LoadNSave.checkIfEmpty("saves/characters")==true) {
-//					JLabel clickLoad = new JLabel("<html>You must create at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
-//					clickLoad.setFont(applyPokemonFont(30f));
-//					clickLoad.setForeground(Color.RED);
-//					gbc.insets = new Insets(150, 700, 0, 0);
-//					startPanel.add(clickLoad, gbc);
-//					updateBackground(startBackgroundLabel, startPanel);
-//					
-//				}
-//				else {
+				if (LoadNSave.checkIfEmpty("saves/characters")==true) {
+					JLabel clickLoad = new JLabel("<html>You must load at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
+					clickLoad.setFont(applyPokemonFont(30f));
+					clickLoad.setForeground(Color.RED);
+					gbc.insets = new Insets(150, 700, 0, 0);
+					startPanel.add(clickLoad, gbc);
+					updateBackground(startBackgroundLabel, startPanel);
+					
+				}
+				else {
 					mainFrame.remove(startPanel);
 					squadSelectionMenu(Player.p1, 0);
-//				}
+				}
 			}
 		});
 		startPanel.add(startButton, gbc);
@@ -119,8 +125,8 @@ public class MainMenu {
 		loadButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				mainFrame.remove(startPanel);
+				loadMenu();
 			}
 		});
 		startPanel.add(loadButton, gbc);
@@ -134,12 +140,103 @@ public class MainMenu {
 	}
 	
 	public void loadMenu() {
-		JPanel loadPanel = new JPanel();
-		
+		JPanel loadPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
+		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		
+		JLabel titleLabel = new JLabel("LOAD MENU'");
+		titleLabel.setFont(applyPokemonFont(100f));
+		titleLabel.setForeground(Color.BLACK);
+		gbc.insets = new Insets(0, 0, 600, 0);
+		loadPanel.add(titleLabel, gbc);
+
+		
+		
+		
+		JLabel profilesLabel = new JLabel("PROFILES");
+		profilesLabel.setFont(applyPokemonFont(70f));
+		profilesLabel.setForeground(Color.BLACK);
+		gbc.insets = new Insets(0, 0, 500, 1000);
+		loadPanel.add(profilesLabel, gbc);
+		
+		
+		int position=300;
+		int number=1;
+		for (File character : LoadNSave.getDirFiles()) {
+			JButton characterButton = new JButton(number+". "+character.getName().substring(0, character.getName().length()-4));
+			characterButton.setFont(applyPokemonFont(30f));
+			characterButton.setBackground(Color.WHITE);
+			gbc.insets = new Insets(0, 0, position, 1000);
+			position=position-200;
+			number++;
+			loadPanel.add(characterButton, gbc);
+		}
+		JTextField profileName = new JTextField();
+		profileName.setBackground(Color.WHITE);
+		profileName.setForeground(Color.BLACK);
+		profileName.setFont(applyPokemonFont(30f));
+		profileName.setPreferredSize(new Dimension(150, 40));
+		gbc.insets = new Insets(0, 0, 0, 200);
+		loadPanel.add(profileName, gbc);
+		
+		JButton createProfileButton = new JButton("Create profile");
+		createProfileButton.setFont(applyPokemonFont(30f));
+		createProfileButton.setBackground(Color.WHITE);
+		gbc.insets = new Insets(0, 120, 0, 0);
+		createProfileButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (profileName.getText().length()==0) {
+					JLabel notPossible = new JLabel("You must choose a nickname");
+					notPossible.setFont(applyPokemonFont(30f));
+					notPossible.setForeground(Color.RED);
+					gbc.insets=new Insets(0, 0, 150, 50);
+					loadPanel.add(notPossible, gbc);
+					updateBackground(loadBackgroundLabel, loadPanel);
+				}
+				else if (profileName.getText().length()>10) {
+					JLabel notPossible = new JLabel("Nickname is too long");
+					notPossible.setFont(applyPokemonFont(30f));
+					notPossible.setForeground(Color.RED);
+					gbc.insets=new Insets(0, 0, 100, 50);
+					loadPanel.add(notPossible, gbc);
+					updateBackground(loadBackgroundLabel, loadPanel);
+				}
+				else {
+					LoadNSave.save(profileName.getText());
+					JLabel success = new JLabel("Profile created! To see it, restart the game.");
+					success.setFont(applyPokemonFont(30f));
+					success.setForeground(Color.GREEN);
+					gbc.insets=new Insets(0, 0, 200, 50);
+					loadPanel.add(success, gbc);
+					updateBackground(loadBackgroundLabel, loadPanel);
+				}
+			}
+		});
+		loadPanel.add(createProfileButton, gbc);
+		
+		JButton back = new JButton("Back");
+		back.setFont(applyPokemonFont(40f));
+		back.setBackground(Color.WHITE);
+		gbc.insets = new Insets(600,0,0,0);
+		back.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				mainFrame.remove(loadPanel);
+				startMenu();
+			}
+		});
+		loadPanel.add(back, gbc);
+		
+		updateBackground(loadBackgroundLabel, loadPanel);
+		
+		mainFrame.add(loadPanel);
+		mainFrame.revalidate();
+		mainFrame.repaint();
+		mainFrame.setVisible(true);		
 	}
 	
 	

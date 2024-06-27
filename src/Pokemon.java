@@ -119,7 +119,7 @@ public class Pokemon {
 						new ImageIcon(Pokemon.class.getResource("images/charmanderFRONT.gif")), 
 						new ImageIcon(Pokemon.class.getResource("images/charmanderBACK.gif"))),
 				
-				new Pokemon("Squirtle", "water", new PokeMove[] {PokeMove.tackle, PokeMove.tailwhip}, 
+				new Pokemon("Squirtle", "water", new PokeMove[] {PokeMove.tackle, PokeMove.tail_whip}, 
 						new double[]{5, 19.4, 14.8, 16.5, 15, 14.3}, new double[] {0, 0, 0, 0}, 
 						new ImageIcon(Pokemon.class.getResource("images/squirtleFRONT.gif")), 
 						new ImageIcon(Pokemon.class.getResource("images/squirtleBACK.gif")))

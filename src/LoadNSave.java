@@ -1,21 +1,29 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class LoadNSave {
 	
-	public static void save(Player p) {
+	private static File charactersDir = new File("saves/characters");
+	private static File[] charactersDirFiles = charactersDir.listFiles();
+	
+	static File[] getDirFiles() {
+		return charactersDirFiles;
+	}
+	
+	
+	
+	
+	public static void save(String characterName) {
 		try {
 			
-			File savedData = new File("saves/characters/"+p.getNickname()+".txt");
-			
+			File savedData = new File("saves/characters/"+characterName+".txt");
 			 
 			if (savedData.createNewFile()) {
-				System.out.println("File created");
-				
-				
-				
-				
-				
+				FileWriter scriviBene = new FileWriter(savedData.getPath());
+				scriviBene.write("Nickname: "+characterName+"\nGames played: 0\nWins: 0\nLoses: 0");
+				scriviBene.close();
+				System.out.println("File created!");
 				
 			}
 			else {
@@ -43,7 +51,7 @@ public class LoadNSave {
 			}
 		}
 		else {
-			System.out.println("this is not a directory");
+			System.out.println(folderPath+" is not a directory path");
 			return false;
 		}
 	}

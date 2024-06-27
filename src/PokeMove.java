@@ -39,48 +39,38 @@ public class PokeMove {
 	
 	//Moves List:
 	
-	//Common:
-	static PokeMove tackle = new PokeMove("Tackle", "normal", "physical", 35, 95, "empty", "empty");
-	static PokeMove growl = new PokeMove("Growl", "normal", "status", 0, 100, "attack", "-");
-
 	//Bulbasaur:
-	static PokeMove vinewhip = new PokeMove("Vine Whip", "grass", "physical", 40, 100, "empty", "empty");
+	static PokeMove vine_whip = new PokeMove("Vine Whip", "grass", "physical", 40, 100, "empty", "empty");
 	static PokeMove razorleaf = new PokeMove("Razor Leaf", "grass", "physical", 55, 95, "empty", "empty");
-	static PokeMove growth = new PokeMove("Growth", "normal", "status", 0, 100, "special attack", "+");
-	static PokeMove seedbomb = new PokeMove("Seed Bomb", "grass", "physical", 80, 100, "empty", "empty");
-	static PokeMove takedown = new PokeMove("Take Down", "normal", "physical", 90, 85, "empty", "empty"); //1/4 damage recoil
-	static PokeMove sweetscent = new PokeMove("Sweet Scent", "normal", "status", 0, 100, "evasion", "-");
-	static PokeMove powerwhip = new PokeMove("Power Whip", "grass", "physical", 120, 85, "empty", "empty");
-	static PokeMove solarbeam = new PokeMove("Solar Beam", "grass", "special", 120, 100, "empty", "empty"); //Turn 1) "Bulb. has taken sunlight", Turn 2) Attack.
+	static PokeMove growth = new PokeMove("Growth", "normal", "status", 0, 100, "special attack", "+"); //Itself
+	static PokeMove solarbeam = new PokeMove("Solar Beam", "grass", "special", 120, 100, "empty", "empty"); //it does it on the second turn
 	
 	//Squirtle:
-	static PokeMove tailwhip = new PokeMove("TailWhip", "normal", "status", 0, 100, "defense", "-");		
-	static PokeMove watergun = new PokeMove("Water Gun", "water", "special", 40, 100, "empty", "empty");
-	static PokeMove withdraw = new PokeMove("Withdraw", "water", "status", 0, 100, "defence", "+");
-	static PokeMove rapidspin = new PokeMove("Rapid Spin", "normal", "physical", 50, 100, "empty", "empty"); //Remove effects
-	static PokeMove bite = new PokeMove("Bite", "dark", "physical", 60, 100, "empty", "empty");
-	static PokeMove waterpuls = new PokeMove("Water Pulse", "water", "special", 60, 100, "empty", "empty");
-	static PokeMove protect = new PokeMove("Protect", "normal", "status", 0, 100, "empty", "empty"); //Protect from everything (damage included)
-	static PokeMove aquatail = new PokeMove("Aqua Tail", "water", "physical", 85, 90, "empty", "empty");
-	static PokeMove irondefence = new PokeMove("Iron Defence", "steel", "status", 0, 100, "defence", "++");
+	static PokeMove tail_whip = new PokeMove("Tail Whip", "normal", "status", 0, 100, "defense", "-");		
+	static PokeMove bubble = new PokeMove("Bubble", "normal", "special", 20, 100, "empty", "empty");		
+	static PokeMove water_gun = new PokeMove("Water Gun", "water", "special", 40, 100, "empty", "empty");
+	static PokeMove bite = new PokeMove("Bite", "normal", "physical", 60, 100, "empty", "empty");
+	static PokeMove withdraw = new PokeMove("Withdraw", "water", "status", 0, 100, "defence", "+"); //itself
+	static PokeMove skull_bash = new PokeMove("Skull Bash", "normal", "physical", 100, 100, "empty", "empty"); //it does it on the second turn
 	static PokeMove hydropump = new PokeMove("Hydro Pump", "water", "special", 120, 80, "empty", "empty");
-	static PokeMove wavecrash = new PokeMove("Wave Crash", "water", "physical", 120, 100, "empty", "empty"); //1/3 recoil
 
-	//Charmender:
+	//Charmander:
 	static PokeMove scratch = new PokeMove("Scratch", "normal", "physical", 40, 100, "empty", "empty");		
-	static PokeMove ember = new PokeMove("Ember", "fire", "special", 40, 100, "empty", "empty");		
-	static PokeMove smokescreen = new PokeMove("Smoke Screen", "normal", "status", 0, 100, "accuracy", "-");		
-	static PokeMove dragonbreath = new PokeMove("Dragon Breath", "dragon", "special", 60, 100, "empty", "empty");		
-	static PokeMove firefang = new PokeMove("Fire Fang", "fire", "physical", 65, 95, "empty", "empty");		
+	static PokeMove ember = new PokeMove("Ember", "fire", "special", 40, 100, "empty", "empty");	
+	static PokeMove leer = new PokeMove("Leer", "normal", "status", 0, 100, "defense", "-");
+	static PokeMove rage = new PokeMove("Rage", "normal", "physical", 20, 100, "attack", "+"); //It continues to use this move until he dies. Everytime he uses it his Attack increases.
 	static PokeMove slash = new PokeMove("Slash", "normal", "physical", 70, 100, "empty", "empty");		
-	static PokeMove flamethrower = new PokeMove("Flamethrower", "fire", "special", 90, 100, "empty", "empty");		
-	static PokeMove scaryface = new PokeMove("Scary Face", "normal", "status", 0, 100, "speed", "--");	
-	static PokeMove inferno = new PokeMove("Inferno", "fire", "special", 100, 50, "attack", "-");
-	static PokeMove flarebits = new PokeMove("Flare Bits", "fire", "physical", 120, 100, "attack", "-");
+	static PokeMove flamethrower = new PokeMove("Flamethrower", "fire", "special", 95, 100, "empty", "empty");		
+	static PokeMove fire_spin = new PokeMove("Fire Spin", "fire", "physical", 15, 70, "empty", "empty"); //It remains for 5 turn, making his opponnent losing everytime 1/8 of its maximum hp.
 
+	//Bulbasaur and Squirtle
+	static PokeMove tackle = new PokeMove("Tackle", "normal", "physical", 35, 95, "empty", "empty");
 
-	//Place holder
-	static PokeMove empty = new PokeMove("empty", "empty", "empty", 0, 0, "empty", "empty"); //placeholder
+	//Bulbasaur and Charmander
+	static PokeMove growl = new PokeMove("Growl", "normal", "status", 0, 100, "attack", "-");
+
+	//Do nothing
+	static PokeMove empty = new PokeMove("empty", "empty", "empty", 0, 0, "empty", "empty");
 	
 	//Switch
 	static PokeMove switchPokemon = new PokeMove("switch");
