@@ -62,6 +62,9 @@ public class Player {
 	 */
 	private int[] otherPositions = {0, 0};
 	
+	private int gamesWon, gamesLost = 0;
+	
+	
 	/**
 	 * It creates a new Player object with a String type nickname. 
 	 * DO NOT create a new player, as the 2 players required for the game are already implemented with a default nickname, "Player1" and "Player2", 
@@ -69,8 +72,10 @@ public class Player {
 	 * @param nickname
 	 * @see #setNickname(String)
 	 */
-	private Player(String nickname){
+	private Player(String nickname, int gamesWon, int gamesLost){
 		this.nickname = nickname;
+		this.gamesWon = gamesWon;
+		this.gamesLost = gamesLost;
 	}
 	
 	/**
@@ -139,6 +144,14 @@ public class Player {
 		return loses;
 	}
 	
+	public int getGamesWon() {
+		return gamesWon;
+	}
+	
+	public int getGamesLost() {
+		return gamesLost;
+	}
+	
 	
 	/**
 	 * Gets one of the two remaining positions in the array pokemonSquad, as the third is the current one and represents the current pokemon fighting in a turn.
@@ -187,9 +200,6 @@ public class Player {
 		this.turnChoice = choice;
 	}
 	
-	
-	
-	
 	public void setVictories(int victories) {
 		this.victories = victories;
 	}
@@ -199,6 +209,13 @@ public class Player {
 		this.loses = loses;
 	}
 	
+	public void setGamesWon(int gamesWon) {
+		this.gamesWon = gamesWon;
+	}
+	
+	public void setGamesLost(int gamesLost) {
+		this.gamesLost = gamesLost;
+	}
 	
 	/**
 	 * Sets which is the current pokemon, which will appear in the battle as the active pokemon during a turn. 
@@ -245,8 +262,8 @@ public class Player {
 	}
 	
 	//Players List
-	static Player p1 = new Player("Player1");
-	static Player p2 = new Player("Player2");
+	static Player p1 = new Player("Player1", 0, 0);
+	static Player p2 = new Player("Player2", 0, 0);
 	
 	
 }

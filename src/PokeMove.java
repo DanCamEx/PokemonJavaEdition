@@ -35,6 +35,9 @@ public class PokeMove {
 	String getStatSign() {
 		return statSign;
 	}
+	String getType() {
+		return type;
+	}
 	
 	
 	//Moves List:
@@ -47,7 +50,7 @@ public class PokeMove {
 	
 	//Squirtle:
 	static PokeMove tail_whip = new PokeMove("Tail Whip", "normal", "status", 0, 100, "defense", "-");		
-	static PokeMove bubble = new PokeMove("Bubble", "normal", "special", 20, 100, "empty", "empty");		
+	static PokeMove bubble = new PokeMove("Bubble", "water", "special", 20, 100, "empty", "empty");		
 	static PokeMove water_gun = new PokeMove("Water Gun", "water", "special", 40, 100, "empty", "empty");
 	static PokeMove bite = new PokeMove("Bite", "normal", "physical", 60, 100, "empty", "empty");
 	static PokeMove withdraw = new PokeMove("Withdraw", "water", "status", 0, 100, "defence", "+"); //itself

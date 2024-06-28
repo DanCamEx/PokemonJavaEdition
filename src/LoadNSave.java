@@ -27,6 +27,7 @@ public class LoadNSave {
 				
 			}
 			else {
+				
 				System.out.println("File already exist");
 			}
 		} catch(IOException e) {
@@ -40,10 +41,10 @@ public class LoadNSave {
 	}
 	
 	
-	public static boolean checkIfEmpty(String folderPath) {
+	public static boolean checkIfLong2(String folderPath) {
 		File file = new File(folderPath);
 		if (file.isDirectory()){
-			if (file.list().length > 0) {
+			if (file.list().length < 2) {
 				return false;
 			}
 			else {

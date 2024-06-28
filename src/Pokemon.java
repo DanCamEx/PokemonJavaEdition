@@ -83,6 +83,10 @@ public class Pokemon {
 		return frontSprite;
 	}
 	
+	String getType() {
+		return type;
+	}
+	
 	//Setters
 	public void setHp(double hp) {
 		this.stats[1] = hp;
@@ -108,18 +112,18 @@ public class Pokemon {
 		
 		Pokemon[] pokemonList = {
 				
-				new Pokemon("Bulbasaur", "grass", new PokeMove[]{PokeMove.tackle, PokeMove.growl}, 
+				new Pokemon("Bulbasaur", "grass", new PokeMove[]{PokeMove.vine_whip, PokeMove.growl}, 
 						new double[]{5, 19.5, 14.9, 14.9, 16.5, 14.5}, new double[]{0, 0, 0, 0}, 
 						new ImageIcon(Pokemon.class.getResource("images/bulbasaurFRONT.gif")), 
 						new ImageIcon(Pokemon.class.getResource("images/bulbasaurBACK.gif"))),	
 				
 				
-				new Pokemon("Charmander", "fire", new PokeMove[] {PokeMove.scratch, PokeMove.growl}, 
+				new Pokemon("Charmander", "fire", new PokeMove[] {PokeMove.ember, PokeMove.growl}, 
 						new double[]{5, 18.9, 15.2, 14.3, 15, 16.5}, new double[]{0, 0, 0, 0}, 
 						new ImageIcon(Pokemon.class.getResource("images/charmanderFRONT.gif")), 
 						new ImageIcon(Pokemon.class.getResource("images/charmanderBACK.gif"))),
 				
-				new Pokemon("Squirtle", "water", new PokeMove[] {PokeMove.tackle, PokeMove.tail_whip}, 
+				new Pokemon("Squirtle", "water", new PokeMove[] {PokeMove.bubble, PokeMove.tail_whip}, 
 						new double[]{5, 19.4, 14.8, 16.5, 15, 14.3}, new double[] {0, 0, 0, 0}, 
 						new ImageIcon(Pokemon.class.getResource("images/squirtleFRONT.gif")), 
 						new ImageIcon(Pokemon.class.getResource("images/squirtleBACK.gif")))
@@ -148,12 +152,14 @@ public class Pokemon {
 	}
 	
 	public static void resetTeam(Player p) {
-		Pokemon[] pokemonSquad = p.getPokemonSquad();
 		int index = 0;
-		for (Pokemon pk : pokemonSquad) {
-			pokemonSquad[index] = createPokemon(pk.getName());
+		for (Pokemon pk : p.getPokemonSquad()) {
+			p.setPokemonSquad(pk.getName(), index);
 			index++;
 		}
+		p.setCurrentPokemon(0);
+		p.setOtherPositions(p);
+		
 	}
 		
 		

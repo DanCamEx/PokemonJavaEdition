@@ -29,6 +29,9 @@ public class Turn {
 	}
 	
 	public static void attack(Player p) {
+		
+		
+		
 		Player otherP = Player.reversePlayer(p);
 		
 		double modifiedDamage = checkStage(p.getCurrentPokemon().getAttack(), p.getCurrentPokemon().getAttackStage());
@@ -37,6 +40,13 @@ public class Turn {
 		double finalDamage = (p.getCurrentPokemon().getLevel() * 2 / 5 + 2 ) * p.getChoice().getPower() * modifiedDamage / modifiedDefense / 50;
 		if(finalDamage > 997) {
 			finalDamage = 999; 
+		}
+		
+		if (checkType(p.getChoice(), otherP.getCurrentPokemon())=="It's super effective!") {
+			finalDamage=finalDamage*2;
+		}
+		else if (checkType(p.getChoice(), otherP.getCurrentPokemon())=="It's not very effective...") {
+			finalDamage=finalDamage/2;
 		}
 		
 		double remainedHp = otherP.getCurrentPokemon().getHp() - finalDamage;
@@ -79,4 +89,20 @@ public class Turn {
 		default: return stageStat;
 		}
 	}
+	
+	public static String checkType(PokeMove pm, Pokemon p) {
+		switch(pm.getType()+"-"+p.getType()) {
+		case("water-fire"):return("It's super effective!");
+		case("grass-water"):return("It's super effective!");
+		case("fire-grass"):return("It's super effective!"); 
+		case("fire-water"):return("It's not very effective...");
+		case("water-grass"):return("It's not very effective...");
+		case("grass-fire"):return("It's not very effective...");
+		default: return("");
+		}
+	}
+	
+	
+	
+	
 }
