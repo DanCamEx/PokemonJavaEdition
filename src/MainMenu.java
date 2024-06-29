@@ -516,13 +516,13 @@ public class MainMenu {
 		}
 		
 		JLabel battleCounterLabel = new JLabel("Match n."+battleCounter);
-		battleCounterLabel.setFont(applyPokemonFont(30f));
+		battleCounterLabel.setFont(applyPokemonFont(40f));
 		battleCounterLabel.setForeground(Color.BLACK);
-		gbc.insets = new Insets(0,0,670,1170);
+		gbc.insets = new Insets(0,0,670,1150);
 		battlePanel.add(battleCounterLabel, gbc);
 
 		JButton fightButton = new JButton("Fight");
-		fightButton.setFont(applyPokemonFont(25f));
+		fightButton.setFont(applyPokemonFont(35f));
 		fightButton.setBackground(Color.WHITE);
 		gbc.insets = new Insets(350,450,0,0);
 		battlePanel.add(fightButton, gbc);
@@ -531,48 +531,48 @@ public class MainMenu {
 		}
 		
 		JButton surrenderButton = new JButton("Surrender");
-		surrenderButton.setFont(applyPokemonFont(25f));
+		surrenderButton.setFont(applyPokemonFont(35f));
 		surrenderButton.setBackground(Color.WHITE);
-		gbc.insets = new Insets(510,450,0,0);
+		gbc.insets = new Insets(550,450,0,0);
 		battlePanel.add(surrenderButton, gbc);
 		
 		JButton moveButton1 = new JButton(p.getCurrentPokemon().getMove1().getName());
-		moveButton1.setFont(applyPokemonFont(25f));
+		moveButton1.setFont(applyPokemonFont(35f));
 		moveButton1.setBackground(Color.WHITE);
 		gbc.insets = new Insets(350,450,0,0);
 		battlePanel.add(moveButton1, gbc);
 		moveButton1.setVisible(false);
 		
 		JButton moveButton2 = new JButton(p.getCurrentPokemon().getMove2().getName());
-		moveButton2.setFont(applyPokemonFont(25f));
+		moveButton2.setFont(applyPokemonFont(35f));
 		moveButton2.setBackground(Color.WHITE);
-		gbc.insets = new Insets(430,450,0,0);
+		gbc.insets = new Insets(450,450,0,0);
 		battlePanel.add(moveButton2, gbc);
 		moveButton2.setVisible(false);
 		
 		JButton moveButton3 = new JButton(p.getCurrentPokemon().getMove3().getName());
-		moveButton3.setFont(applyPokemonFont(25f));
+		moveButton3.setFont(applyPokemonFont(35f));
 		moveButton3.setBackground(Color.WHITE);
-		gbc.insets = new Insets(510,450,0,0);
+		gbc.insets = new Insets(550,450,0,0);
 		battlePanel.add(moveButton3, gbc);
 		moveButton3.setVisible(false);
 		
 		JButton moveButton4 = new JButton(p.getCurrentPokemon().getMove4().getName());
-		moveButton4.setFont(applyPokemonFont(25f));
+		moveButton4.setFont(applyPokemonFont(35f));
 		moveButton4.setBackground(Color.WHITE);
-		gbc.insets = new Insets(590,450,0,0);
+		gbc.insets = new Insets(650,450,0,0);
 		battlePanel.add(moveButton4, gbc);
 		moveButton4.setVisible(false);
 		
 		JButton back = new JButton("Back");
-		back.setFont(applyPokemonFont(25f));
+		back.setFont(applyPokemonFont(30f));
 		back.setBackground(Color.WHITE);
 		gbc.insets = new Insets(670,450,0,200);
 		battlePanel.add(back, gbc);
 		back.setVisible(false);
 		
 		JButton pk1 = new JButton(p.getPokemon(p.getOtherPosition(0)).getName()+"  "+(int)p.getPokemon(p.getOtherPosition(0)).getHp()+" HP");
-		pk1.setFont(applyPokemonFont(25f));
+		pk1.setFont(applyPokemonFont(35f));
 		pk1.setBackground(Color.WHITE);
 		gbc.insets = new Insets(350,450,0,0);
 		battlePanel.add(pk1, gbc);
@@ -582,9 +582,9 @@ public class MainMenu {
 		pk1.setVisible(false);
 		
 		JButton pk2 = new JButton(p.getPokemon(p.getOtherPosition(1)).getName()+"  "+(int)p.getPokemon(p.getOtherPosition(1)).getHp()+" HP");
-		pk2.setFont(applyPokemonFont(25f));
+		pk2.setFont(applyPokemonFont(35f));
 		pk2.setBackground(Color.WHITE);
-		gbc.insets = new Insets(430,450,0,0);
+		gbc.insets = new Insets(450,450,0,0);
 		battlePanel.add(pk2, gbc);
 		if ((int)p.getPokemon(p.getOtherPosition(1)).getHp()<=0) {
 			pk2.setEnabled(false);
@@ -592,15 +592,15 @@ public class MainMenu {
 		pk2.setVisible(false);
 		
 		JLabel choiceText = new JLabel(p.getNickname()+", what do you want to do?");
-		choiceText.setFont(applyPokemonFont(25f));
+		choiceText.setFont(applyPokemonFont(35f));
 		choiceText.setForeground(Color.BLACK);
 		gbc.insets = new Insets(250,450,0,0);
 		battlePanel.add(choiceText, gbc);
 		
 		JButton changePokemonButton = new JButton("Change  Pokémon");
-		changePokemonButton.setFont(applyPokemonFont(25f));
+		changePokemonButton.setFont(applyPokemonFont(35f));
 		changePokemonButton.setBackground(Color.WHITE);
-		gbc.insets = new Insets(430,450,0,0);
+		gbc.insets = new Insets(450,450,0,0);
 		battlePanel.add(changePokemonButton, gbc);
 		if (pk1.isEnabled()==false && pk2.isEnabled()==false) {
 			changePokemonButton.setEnabled(false);
@@ -1027,9 +1027,9 @@ public class MainMenu {
 					
 					if (counter==3) {
 						JLabel label1 = new JLabel("<html>"+p.getNickname()+"'s "+p.getCurrentPokemon().getName()+" uses "+p.getChoice().getName()+"<br>"+Turn.checkType(p.getChoice(), otherP.getCurrentPokemon())+"</html>");
-						label1.setFont(applyPokemonFont(30f));
-						label1.setForeground(Color.BLACK);
-						gbc.insets = new Insets(0, 0, position, 800);
+						label1.setFont(applyPokemonFont(35f));
+						label1.setForeground(Color.WHITE);
+						gbc.insets = new Insets(0, 0, position, 750);
 						battlePanel.add(label1, gbc);
 						updateBackground(battleBackgroundLabel, battlePanel);
 						counter--;
@@ -1037,9 +1037,9 @@ public class MainMenu {
 					
 					else if (counter==2) {
 						JLabel label2 = new JLabel("<html>"+otherP.getNickname()+"'s "+otherP.getCurrentPokemon().getName()+" hp are now "+(int)otherP.getCurrentPokemon().getHp()+"</html>");
-						label2.setFont(applyPokemonFont(30f));
-						label2.setForeground(Color.BLACK);
-						gbc.insets = new Insets(0, 0, position-110, 800);
+						label2.setFont(applyPokemonFont(35f));
+						label2.setForeground(Color.WHITE);
+						gbc.insets = new Insets(0, 0, position-110, 750);
 						battlePanel.add(label2, gbc);
 						
 						try {
@@ -1116,9 +1116,9 @@ public class MainMenu {
 					
 					if (counter == 3) {
 						JLabel label3 = new JLabel("<html>"+p.getNickname()+"'s "+p.getCurrentPokemon().getName()+" uses "+p.getChoice().getName()+"</html>");
-						label3.setFont(applyPokemonFont(30f));
-						label3.setForeground(Color.BLACK);
-						gbc.insets = new Insets(0, 0, position, 800);
+						label3.setFont(applyPokemonFont(35f));
+						label3.setForeground(Color.WHITE);
+						gbc.insets = new Insets(0, 0, position, 750);
 						battlePanel.add(label3, gbc);
 						updateBackground(battleBackgroundLabel, battlePanel);
 						counter--;
@@ -1126,9 +1126,9 @@ public class MainMenu {
 					
 					else if (counter==2) {
 						JLabel label4 = new JLabel("<html>"+otherP.getNickname()+"'s "+otherP.getCurrentPokemon().getName()+" "+p.getChoice().getStatModifier()+" has changed by "+p.getChoice().getStatSign()+"1</html>");
-						label4.setFont(applyPokemonFont(30f));
-						label4.setForeground(Color.BLACK);
-						gbc.insets = new Insets(0, 0, position-50, 800);
+						label4.setFont(applyPokemonFont(35f));
+						label4.setForeground(Color.WHITE);
+						gbc.insets = new Insets(0, 0, position-50, 750);
 						battlePanel.add(label4, gbc);
 						
 						try {
@@ -1168,9 +1168,9 @@ public class MainMenu {
 					if (counter==3) {
 						if (p==Player.p1) {
 							JLabel label5 = new JLabel("<html>"+p.getNickname()+"'s "+p.getCurrentPokemon().getName()+" switched to "+p.getPokemon(chosenPosition1).getName()+"!</html>");
-							label5.setFont(applyPokemonFont(30f));
-							label5.setForeground(Color.BLACK);
-							gbc.insets = new Insets(0, 0, position, 800);
+							label5.setFont(applyPokemonFont(35f));
+							label5.setForeground(Color.WHITE);
+							gbc.insets = new Insets(0, 0, position, 750);
 							battlePanel.add(label5, gbc);
 							updateBackground(battleBackgroundLabel, battlePanel);
 							counter--;
@@ -1178,9 +1178,9 @@ public class MainMenu {
 						
 						else {
 							JLabel label5 = new JLabel("<html>"+p.getNickname()+"'s "+p.getCurrentPokemon().getName()+" switched to "+p.getPokemon(chosenPosition2).getName()+"!</html>");
-							label5.setFont(applyPokemonFont(30f));
-							label5.setForeground(Color.BLACK);
-							gbc.insets = new Insets(0, 0, position, 800);
+							label5.setFont(applyPokemonFont(35f));
+							label5.setForeground(Color.WHITE);
+							gbc.insets = new Insets(0, 0, position, 750);
 							battlePanel.add(label5, gbc);
 							updateBackground(battleBackgroundLabel, battlePanel);
 							counter--;
@@ -1244,8 +1244,8 @@ public class MainMenu {
 	
 	public void updatePlayerInfo(Player p) throws FontFormatException, IOException {
 		if (p==Player.p1) {
-			player1Info.setText("<html>"+p.getCurrentPokemon().getName() + "&nbsp;Lv."+(int)p.getCurrentPokemon().getLevel() + "<br>"+(int)p.getCurrentPokemon().getHp() + " HP</html>");
-			player1Info.setFont(applyPokemonFont(35f));
+			player1Info.setText("<html>"+p.getNickname()+"<br>"+p.getCurrentPokemon().getName() + "&nbsp;Lv."+(int)p.getCurrentPokemon().getLevel() + "<br>"+(int)p.getCurrentPokemon().getHp() + " HP</html>");
+			player1Info.setFont(applyPokemonFont(40f));
 			player1Info.setForeground(Color.BLACK);
 			gbc.insets = new Insets(100, 0, 0, 800);
 			battlePanel.add(player1Info, gbc);
@@ -1254,8 +1254,8 @@ public class MainMenu {
 			mainFrame.repaint();
 		}
 		else {
-			player2Info.setText("<html>"+ p.getCurrentPokemon().getName() + "&nbsp;Lv."+(int)p.getCurrentPokemon().getLevel() + "<br>" + (int)p.getCurrentPokemon().getHp() +" HP</html>");
-			player2Info.setFont(applyPokemonFont(35f));
+			player2Info.setText("<html>"+p.getNickname()+"<br>"+p.getCurrentPokemon().getName() + "&nbsp;Lv."+(int)p.getCurrentPokemon().getLevel() + "<br>" + (int)p.getCurrentPokemon().getHp() +" HP</html>");
+			player2Info.setFont(applyPokemonFont(40f));
 			player2Info.setForeground(Color.BLACK);
 			gbc.insets = new Insets(0, 200, 300, 0);
 			battlePanel.add(player2Info, gbc);
