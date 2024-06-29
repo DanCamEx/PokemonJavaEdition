@@ -8,7 +8,7 @@ public class Pokemon {
 	private String name, type;
 	private double[] stages = new double[4];
 	private double[] stats = new double[6];
-	private PokeMove[] moveSet = new PokeMove[2];
+	private PokeMove[] moveSet = new PokeMove[4];
 	
 	//Constructors
 	Pokemon() {
@@ -75,7 +75,12 @@ public class Pokemon {
 	PokeMove getMove2() {
 		return moveSet[1];	
 		}
-	
+	PokeMove getMove3() {
+		return moveSet[2];
+	}
+	PokeMove getMove4() {
+		return moveSet[3];
+	}
 	ImageIcon getBackSprite() {
 		return backSprite;
 	}
@@ -112,18 +117,18 @@ public class Pokemon {
 		
 		Pokemon[] pokemonList = {
 				
-				new Pokemon("Bulbasaur", "grass", new PokeMove[]{PokeMove.vine_whip, PokeMove.growl}, 
+				new Pokemon("Bulbasaur", "grass", new PokeMove[]{PokeMove.vine_whip, PokeMove.growl, PokeMove.razorleaf, PokeMove.tackle}, 
 						new double[]{5, 19.5, 14.9, 14.9, 16.5, 14.5}, new double[]{0, 0, 0, 0}, 
 						new ImageIcon(Pokemon.class.getResource("images/bulbasaurFRONT.gif")), 
 						new ImageIcon(Pokemon.class.getResource("images/bulbasaurBACK.gif"))),	
 				
 				
-				new Pokemon("Charmander", "fire", new PokeMove[] {PokeMove.ember, PokeMove.growl}, 
+				new Pokemon("Charmander", "fire", new PokeMove[] {PokeMove.ember, PokeMove.growl, PokeMove.scratch, PokeMove.flamethrower}, 
 						new double[]{5, 18.9, 15.2, 14.3, 15, 16.5}, new double[]{0, 0, 0, 0}, 
 						new ImageIcon(Pokemon.class.getResource("images/charmanderFRONT.gif")), 
 						new ImageIcon(Pokemon.class.getResource("images/charmanderBACK.gif"))),
 				
-				new Pokemon("Squirtle", "water", new PokeMove[] {PokeMove.bubble, PokeMove.tail_whip}, 
+				new Pokemon("Squirtle", "water", new PokeMove[] {PokeMove.bubble, PokeMove.tail_whip, PokeMove.bite, PokeMove.water_gun}, 
 						new double[]{5, 19.4, 14.8, 16.5, 15, 14.3}, new double[] {0, 0, 0, 0}, 
 						new ImageIcon(Pokemon.class.getResource("images/squirtleFRONT.gif")), 
 						new ImageIcon(Pokemon.class.getResource("images/squirtleBACK.gif")))

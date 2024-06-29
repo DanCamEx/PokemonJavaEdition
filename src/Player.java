@@ -62,7 +62,7 @@ public class Player {
 	 */
 	private int[] otherPositions = {0, 0};
 	
-	private int gamesWon, gamesLost = 0;
+	private int gamesWon, gamesLost, gamesPlayed = 0;
 	
 	
 	/**
@@ -138,7 +138,9 @@ public class Player {
 	}
 	
 	
-	
+	public int getGamesPlayed() {
+		return gamesPlayed;
+	}
 	
 	public int getLoses() {
 		return loses;
@@ -208,6 +210,11 @@ public class Player {
 	public void setLoses(int loses) {
 		this.loses = loses;
 	}
+	
+	public void setGamesPlayed(int gamesPlayed) {
+		this.gamesPlayed = gamesPlayed;
+	}
+	
 	
 	public void setGamesWon(int gamesWon) {
 		this.gamesWon = gamesWon;

@@ -49,6 +49,9 @@ public class MainMenu {
 	private ImageIcon transitionBackground = new ImageIcon(getClass().getResource("images/transitionBackground.jpg"));
 	private JLabel transitionBackgroundLabel = new JLabel(transitionBackground);
 	
+	private ImageIcon profileBackground = new ImageIcon(getClass().getResource("images/profileBackground.jpg"));
+	private JLabel profileBackgroundLabel = new JLabel(profileBackground);
+	
 	private int chosenPosition1;
 	private int chosenPosition2;
 	
@@ -191,6 +194,28 @@ public class MainMenu {
 			chooseP2Button.setVisible(false);
 			loadPanel.add(chooseP2Button, gbc);
 			
+			gbc.insets = new Insets(0, 200, position, 0);
+			JButton viewProfileButton = new JButton("View profile");
+			viewProfileButton.setFont(applyPokemonFont(30f));
+			viewProfileButton.setBackground(Color.WHITE);
+			viewProfileButton.setVisible(false);
+			loadPanel.add(viewProfileButton, gbc);
+			
+			JLabel profile1LoadedLabel = new JLabel("Correctly loaded as Player 1!");
+			profile1LoadedLabel.setFont(applyPokemonFont(30f));
+			profile1LoadedLabel.setForeground(Color.GREEN);
+			gbc.insets = new Insets(0, 0, position+100, 600);
+			loadPanel.add(profile1LoadedLabel, gbc);
+			profile1LoadedLabel.setVisible(false);
+			
+			JLabel profile2LoadedLabel = new JLabel("Correctly loaded as Player 2!");
+			profile2LoadedLabel.setFont(applyPokemonFont(30f));
+			profile2LoadedLabel.setForeground(Color.GREEN);
+			gbc.insets = new Insets(0, 0, position+100, 200);
+			loadPanel.add(profile2LoadedLabel, gbc);
+			profile2LoadedLabel.setVisible(false);
+			
+			
 			number++;
 			position=position-200;
 			characterButton.addActionListener(new ActionListener() {
@@ -198,8 +223,45 @@ public class MainMenu {
 				public void actionPerformed(ActionEvent e) {
 					chooseP1Button.setVisible(true);
 					chooseP2Button.setVisible(true);
+					viewProfileButton.setVisible(true);
 				}
 			});
+			chooseP1Button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						LoadNSave.load(character.getName().substring(0, character.getName().length()-4), Player.p1);
+						profile2LoadedLabel.setVisible(false);
+						profile1LoadedLabel.setVisible(true);
+					} catch (IOException e1) {
+						System.out.println("Error. Can't load the profile.");
+						e1.printStackTrace();
+					}
+				}
+			});
+			chooseP2Button.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					try {
+						LoadNSave.load(character.getName().substring(0, character.getName().length()-4), Player.p2);
+						profile2LoadedLabel.setVisible(true);
+						profile1LoadedLabel.setVisible(false);
+					} catch (IOException e1) {
+						System.out.println("Error. Can't load the profile.");
+						e1.printStackTrace();
+					}
+				}
+			});
+			
+			viewProfileButton.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					loadPanel.removeAll();
+					mainFrame.remove(loadPanel);
+					viewProfileMenu(character.getName().substring(0, character.getName().length()-4));
+				}
+			});
+			
 		}
 		JTextField profileName = new JTextField();
 		profileName.setBackground(Color.WHITE);
@@ -233,7 +295,7 @@ public class MainMenu {
 					updateBackground(loadBackgroundLabel, loadPanel);
 				}
 				else {
-					LoadNSave.save(profileName.getText());
+					LoadNSave.create(profileName.getText());
 					JLabel success = new JLabel("Profile created! To see it, restart the game.");
 					success.setFont(applyPokemonFont(30f));
 					success.setForeground(Color.GREEN);
@@ -263,10 +325,57 @@ public class MainMenu {
 		
 		mainFrame.add(loadPanel);
 		mainFrame.revalidate();
-		mainFrame.repaint();
-		mainFrame.setVisible(true);		
+		mainFrame.repaint();	
 	}
 	
+	public void viewProfileMenu(String characterName) {
+		JPanel profilePanel = new JPanel(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		
+		gbc.gridx=0;
+		gbc.gridy=0;
+		
+		JLabel title =  new JLabel(characterName+"'s profile stats");
+		title.setFont(applyPokemonFont(100f));
+		title.setForeground(Color.WHITE);
+		gbc.insets = new Insets(0, 0, 500, 600);
+		profilePanel.add(title, gbc);
+		updateBackground(profileBackgroundLabel, profilePanel);
+		
+		JButton back = new JButton("Back");
+		back.setFont(applyPokemonFont(40f));
+		back.setBackground(Color.WHITE);
+		gbc.insets = new Insets(600,0,0,800);
+		back.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				profilePanel.removeAll();
+				mainFrame.remove(profilePanel);
+				loadMenu();
+			}
+		});
+		profilePanel.add(back, gbc);
+		
+		
+		try {
+			JLabel info =  new JLabel(LoadNSave.read(characterName));
+			info.setFont(applyPokemonFont(70f));
+			info.setForeground(Color.WHITE);
+			gbc.insets = new Insets(0, 0, 0, 600);
+			profilePanel.add(info, gbc);
+			updateBackground(profileBackgroundLabel, profilePanel);
+		} catch (IOException e) {
+			System.out.println("I can't view this info :(");
+			e.printStackTrace();
+		}
+		
+		updateBackground(profileBackgroundLabel, profilePanel);
+		
+		mainFrame.add(profilePanel);
+		mainFrame.revalidate();
+		mainFrame.repaint();	
+		
+	}
 	
 	public void squadSelectionMenu(Player p, int pokemonPosition) {
 		int i = pokemonPosition;
@@ -386,7 +495,6 @@ public class MainMenu {
 			fightButton.setEnabled(false);
 		}
 		
-		
 		JButton surrenderButton = new JButton("Surrender");
 		surrenderButton.setFont(applyPokemonFont(25f));
 		surrenderButton.setBackground(Color.WHITE);
@@ -407,10 +515,25 @@ public class MainMenu {
 		battlePanel.add(moveButton2, gbc);
 		moveButton2.setVisible(false);
 		
+		JButton moveButton3 = new JButton(p.getCurrentPokemon().getMove3().getName());
+		moveButton3.setFont(applyPokemonFont(25f));
+		moveButton3.setBackground(Color.WHITE);
+		gbc.insets = new Insets(510,450,0,0);
+		battlePanel.add(moveButton3, gbc);
+		moveButton3.setVisible(false);
+		
+		JButton moveButton4 = new JButton(p.getCurrentPokemon().getMove4().getName());
+		moveButton4.setFont(applyPokemonFont(25f));
+		moveButton4.setBackground(Color.WHITE);
+		gbc.insets = new Insets(590,450,0,0);
+		battlePanel.add(moveButton4, gbc);
+		moveButton4.setVisible(false);
+		
+		
 		JButton back = new JButton("Back");
 		back.setFont(applyPokemonFont(25f));
 		back.setBackground(Color.WHITE);
-		gbc.insets = new Insets(600,450,0,0);
+		gbc.insets = new Insets(670,450,0,200);
 		battlePanel.add(back, gbc);
 		back.setVisible(false);
 		
@@ -457,6 +580,8 @@ public class MainMenu {
 				changePokemonButton.setVisible(false);
 				moveButton1.setVisible(true);
 				moveButton2.setVisible(true);
+				moveButton3.setVisible(true);
+				moveButton4.setVisible(true);
 				back.setVisible(true);
 				mainFrame.revalidate();
 				mainFrame.repaint();
@@ -561,6 +686,8 @@ public class MainMenu {
 				changePokemonButton.setVisible(true);
 				moveButton1.setVisible(false);
 				moveButton2.setVisible(false);
+				moveButton3.setVisible(false);
+				moveButton4.setVisible(false);
 				back.setVisible(false);
 				pk2.setVisible(false);
 				pk1.setVisible(false);
@@ -581,6 +708,8 @@ public class MainMenu {
 				else {
 					moveButton2.setEnabled(false);
 					moveButton1.setEnabled(false);
+					moveButton3.setEnabled(false);
+					moveButton4.setEnabled(false);
 					back.setEnabled(false);
 					turnMenu(Turn.speedCheck(), 500, false);
 				}
@@ -598,6 +727,46 @@ public class MainMenu {
 				else {
 					moveButton2.setEnabled(false);
 					moveButton1.setEnabled(false);
+					moveButton3.setEnabled(false);
+					moveButton4.setEnabled(false);
+					back.setEnabled(false);
+					turnMenu(Turn.speedCheck(), 500, false);
+				}
+			}
+		});
+		
+		moveButton3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				p.setChoice(p.getCurrentPokemon().getMove3());
+				if (p == Player.p1) {
+					battlePanel.removeAll();
+					choiceMenu(Player.p2);
+				}
+				else {
+					moveButton2.setEnabled(false);
+					moveButton1.setEnabled(false);
+					moveButton3.setEnabled(false);
+					moveButton4.setEnabled(false);
+					back.setEnabled(false);
+					turnMenu(Turn.speedCheck(), 500, false);
+				}
+			}
+		});
+		
+		moveButton4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				p.setChoice(p.getCurrentPokemon().getMove4());
+				if (p == Player.p1) {
+					battlePanel.removeAll();
+					choiceMenu(Player.p2);
+				}
+				else {
+					moveButton2.setEnabled(false);
+					moveButton1.setEnabled(false);
+					moveButton3.setEnabled(false);
+					moveButton4.setEnabled(false);
 					back.setEnabled(false);
 					turnMenu(Turn.speedCheck(), 500, false);
 				}
@@ -610,10 +779,10 @@ public class MainMenu {
 				surrenderButton.setEnabled(false);
 				fightButton.setEnabled(false);
 				changePokemonButton.setEnabled(false);
+				Player otherP = Player.reversePlayer(p);
 				
 				if (battleCounter!=3) {
 					p.setLoses(p.getLoses()+1);
-					Player otherP = Player.reversePlayer(p);
 					otherP.setVictories(otherP.getVictories()+1);
 					Pokemon.resetTeam(p);
 					finishMenu("match", otherP, p);
@@ -626,6 +795,16 @@ public class MainMenu {
 					loseLabel.setFont(applyPokemonFont(70f));
 					loseLabel.setForeground(Color.RED);
 					if (p==Player.p2 && p.getLoses()==2) {
+						int gameLost = p.getGamesLost();
+						int gamePlayed1 = p.getGamesPlayed();
+						int gamePlayed2 = otherP.getGamesPlayed();
+						int gameWon = otherP.getGamesWon();						
+						p.setGamesLost(gameLost+1);
+						p.setGamesPlayed(gamePlayed1+1);
+						otherP.setGamesWon(gameWon+1);
+						otherP.setGamesPlayed(gamePlayed2+1);
+						LoadNSave.save(p);
+						LoadNSave.save(otherP);
 						gbc.insets = new Insets(50, 420, 0, 0);
 						gbc.gridx = 0;
 						gbc.gridy = 0;
@@ -636,6 +815,16 @@ public class MainMenu {
 						finishMenu("end", Player.p1, Player.p2);
 					}
 					else {
+						int gameLost = otherP.getGamesLost();
+						int gamePlayed1 = p.getGamesPlayed();
+						int gamePlayed2 = otherP.getGamesPlayed();
+						int gameWon = p.getGamesWon();						
+						otherP.setGamesLost(gameLost+1);
+						otherP.setGamesPlayed(gamePlayed2+1);
+						p.setGamesWon(gameWon+1);
+						p.setGamesPlayed(gamePlayed1+1);
+						LoadNSave.save(p);
+						LoadNSave.save(otherP);
 						gbc.insets = new Insets(450, 0, 0, 500);
 						gbc.gridx = 0;
 						gbc.gridy = 0;

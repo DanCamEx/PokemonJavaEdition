@@ -45,7 +45,7 @@ public class PokeMove {
 	//Bulbasaur:
 	static PokeMove vine_whip = new PokeMove("Vine Whip", "grass", "physical", 40, 100, "empty", "empty");
 	static PokeMove razorleaf = new PokeMove("Razor Leaf", "grass", "physical", 55, 95, "empty", "empty");
-	static PokeMove growth = new PokeMove("Growth", "normal", "status", 0, 100, "special attack", "+"); //Itself
+	static PokeMove growth = new PokeMove("Growth", "normal", "status", 0, 100, "special", "+"); //Itself
 	static PokeMove solarbeam = new PokeMove("Solar Beam", "grass", "special", 120, 100, "empty", "empty"); //it does it on the second turn
 	
 	//Squirtle:
