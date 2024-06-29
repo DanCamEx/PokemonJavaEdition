@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class Turn {
 	
-	//Methods
 	public static Player speedCheck() {
 		if (Player.p1.getChoice().getCategory()=="switch") {
 			return(Player.p1);
@@ -29,8 +28,6 @@ public class Turn {
 	}
 	
 	public static void attack(Player p) {
-		
-		
 		
 		Player otherP = Player.reversePlayer(p);
 		
@@ -73,6 +70,7 @@ public class Turn {
 	}
 	
 	public static double checkStage(double stageStat, double stage) {
+		
 		switch((int)stage) {
 		case(+6): return stageStat * 4;
 		case(+5): return stageStat * 3.5;
@@ -91,6 +89,7 @@ public class Turn {
 	}
 	
 	public static String checkType(PokeMove pm, Pokemon p) {
+		
 		switch(pm.getType()+"-"+p.getType()) {
 		case("water-fire"):return("It's super effective!");
 		case("grass-water"):return("It's super effective!");

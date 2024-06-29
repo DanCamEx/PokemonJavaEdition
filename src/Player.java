@@ -130,13 +130,9 @@ public class Player {
 		return currentPosition;
 	}
 	
-	
-	
-	
 	public int getVictories() {
 		return victories;
 	}
-	
 	
 	public int getGamesPlayed() {
 		return gamesPlayed;
@@ -153,7 +149,6 @@ public class Player {
 	public int getGamesLost() {
 		return gamesLost;
 	}
-	
 	
 	/**
 	 * Gets one of the two remaining positions in the array pokemonSquad, as the third is the current one and represents the current pokemon fighting in a turn.
@@ -205,7 +200,6 @@ public class Player {
 	public void setVictories(int victories) {
 		this.victories = victories;
 	}
-	
 	
 	public void setLoses(int loses) {
 		this.loses = loses;
@@ -271,6 +265,5 @@ public class Player {
 	//Players List
 	static Player p1 = new Player("Player1", 0, 0);
 	static Player p2 = new Player("Player2", 0, 0);
-	
 	
 }

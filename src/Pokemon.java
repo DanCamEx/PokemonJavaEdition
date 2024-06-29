@@ -2,15 +2,12 @@ import javax.swing.ImageIcon;
 
 public class Pokemon {
 	
-	//Anvedi che tempo!
-	//Attributes
 	private ImageIcon frontSprite, backSprite;
 	private String name, type;
 	private double[] stages = new double[4];
 	private double[] stats = new double[6];
 	private PokeMove[] moveSet = new PokeMove[4];
 	
-	//Constructors
 	Pokemon() {
 		
 	}
@@ -24,7 +21,6 @@ public class Pokemon {
 		this.backSprite = backSprite;
 	}
 	
-	//Getters
 	String getName(){
 		return name;
 	}
@@ -71,10 +67,10 @@ public class Pokemon {
 
 	PokeMove getMove1() {
 		return moveSet[0];
-		}
+	}
 	PokeMove getMove2() {
 		return moveSet[1];	
-		}
+	}
 	PokeMove getMove3() {
 		return moveSet[2];
 	}
@@ -92,7 +88,6 @@ public class Pokemon {
 		return type;
 	}
 	
-	//Setters
 	public void setHp(double hp) {
 		this.stats[1] = hp;
 	}
@@ -112,7 +107,6 @@ public class Pokemon {
 		}
 	}
 	
-	//Methods
 	public static Pokemon createPokemon(String pokemonName) {
 		
 		Pokemon[] pokemonList = {
@@ -132,7 +126,6 @@ public class Pokemon {
 						new double[]{5, 19.4, 14.8, 16.5, 15, 14.3}, new double[] {0, 0, 0, 0}, 
 						new ImageIcon(Pokemon.class.getResource("images/squirtleFRONT.gif")), 
 						new ImageIcon(Pokemon.class.getResource("images/squirtleBACK.gif")))
-		
 				
 		};
 		
@@ -166,12 +159,4 @@ public class Pokemon {
 		p.setOtherPositions(p);
 		
 	}
-		
-		
-		
-	
-	
-	
-	
-	
 }

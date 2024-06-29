@@ -1,7 +1,6 @@
 
 public class PokeMove {
 	
-	//Attributes
 	private String name, type, category, statModifier, statSign;
 	private double power, accuracy;
 	
@@ -19,7 +18,6 @@ public class PokeMove {
 		this.statSign = statSign;
 	}
 	
-	//Getters
 	String getName() {
 		return name;
 	}
@@ -40,15 +38,15 @@ public class PokeMove {
 	}
 	
 	
-	//Moves List:
+	//Moves List
 	
-	//Bulbasaur:
+	//Bulbasaur
 	static PokeMove vine_whip = new PokeMove("Vine Whip", "grass", "physical", 40, 100, "empty", "empty");
 	static PokeMove razorleaf = new PokeMove("Razor Leaf", "grass", "physical", 55, 95, "empty", "empty");
 	static PokeMove growth = new PokeMove("Growth", "normal", "status", 0, 100, "special", "+"); //Itself
 	static PokeMove solarbeam = new PokeMove("Solar Beam", "grass", "special", 120, 100, "empty", "empty"); //it does it on the second turn
 	
-	//Squirtle:
+	//Squirtle
 	static PokeMove tail_whip = new PokeMove("Tail Whip", "normal", "status", 0, 100, "defense", "-");		
 	static PokeMove bubble = new PokeMove("Bubble", "water", "special", 20, 100, "empty", "empty");		
 	static PokeMove water_gun = new PokeMove("Water Gun", "water", "special", 40, 100, "empty", "empty");
@@ -57,7 +55,7 @@ public class PokeMove {
 	static PokeMove skull_bash = new PokeMove("Skull Bash", "normal", "physical", 100, 100, "empty", "empty"); //it does it on the second turn
 	static PokeMove hydropump = new PokeMove("Hydro Pump", "water", "special", 120, 80, "empty", "empty");
 
-	//Charmander:
+	//Charmander
 	static PokeMove scratch = new PokeMove("Scratch", "normal", "physical", 40, 100, "empty", "empty");		
 	static PokeMove ember = new PokeMove("Ember", "fire", "special", 40, 100, "empty", "empty");	
 	static PokeMove leer = new PokeMove("Leer", "normal", "status", 0, 100, "defense", "-");

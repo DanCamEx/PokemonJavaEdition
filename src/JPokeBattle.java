@@ -3,7 +3,12 @@ public class JPokeBattle {
 	
 	public static void main(String[] args) {
 		
-		MainMenu Session = new MainMenu();
-		Session.startMenu();
+		try {
+			MainMenu Session = new MainMenu();
+			Session.startMenu();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

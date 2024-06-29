@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,31 +35,36 @@ public class MainMenu {
 	private JLabel player1Info = new JLabel();
 	private JLabel player2Info = new JLabel();
 	
-	private ImageIcon battleBackground = new ImageIcon(getClass().getResource("images/battleBackground.png"));
+	private ImageIcon battleBackground = new ImageIcon(getClass().getResource("/images/battleBackground.png"));
 	private JLabel battleBackgroundLabel = new JLabel(battleBackground);
 	
-	private ImageIcon startBackground = new ImageIcon(getClass().getResource("images/startBackground.png"));
+	private ImageIcon startBackground = new ImageIcon(getClass().getResource("/images/startBackground.png"));
 	private JLabel startBackgroundLabel = new JLabel(startBackground);
 	
-	private ImageIcon squadBackground = new ImageIcon(getClass().getResource("images/chooseStarter.jpg"));
+	private ImageIcon squadBackground = new ImageIcon(getClass().getResource("/images/chooseStarter.jpg"));
 	private JLabel squadBackgroundLabel = new JLabel(squadBackground);
 	
-	private ImageIcon loadBackground = new ImageIcon(getClass().getResource("images/loadBackground.jpg"));
+	private ImageIcon loadBackground = new ImageIcon(getClass().getResource("/images/loadBackground.jpg"));
 	private JLabel loadBackgroundLabel = new JLabel(loadBackground);
 	
-	private ImageIcon transitionBackground = new ImageIcon(getClass().getResource("images/transitionBackground.jpg"));
+	private ImageIcon transitionBackground = new ImageIcon(getClass().getResource("/images/transitionBackground.jpg"));
 	private JLabel transitionBackgroundLabel = new JLabel(transitionBackground);
 	
-	private ImageIcon profileBackground = new ImageIcon(getClass().getResource("images/profileBackground.jpg"));
+	private ImageIcon profileBackground = new ImageIcon(getClass().getResource("/images/profileBackground.jpg"));
 	private JLabel profileBackgroundLabel = new JLabel(profileBackground);
 	
 	private int chosenPosition1;
 	private int chosenPosition2;
+
+	private GridBagConstraints gbc = new GridBagConstraints();
 	
 	private int battleCounter = 1;
-	
+
 	//GUI IMPLEMENTATION
 	public MainMenu() {
+		
+		gbc.gridx = 0;
+		gbc.gridy = 0;
 		
 		mainFrame.setTitle("Pokémon Java Version");
 		mainFrame.setSize(1296, 759);
@@ -73,13 +79,11 @@ public class MainMenu {
 	}
 	
 	public void startMenu() {
+		
+		//MENU SETTING
 		JPanel startPanel = new JPanel(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
 		
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		
-		ImageIcon logo = new ImageIcon(getClass().getResource("images/logo.png"));
+		ImageIcon logo = new ImageIcon(getClass().getClassLoader().getResource("images/logo.png"));
 		JLabel logoLabel = new JLabel("", logo, JLabel.CENTER);
 		gbc.insets = new Insets(0, 0, 250, 30);
 		startPanel.add(logoLabel, gbc);
@@ -89,71 +93,86 @@ public class MainMenu {
 		gbc.insets = new Insets(0, 0, 80, 0);
 		startPanel.add(title, gbc);
 		
+		//BUTTON SETTING
 		JButton startButton = new JButton("    Start    ");
 		startButton.setFont(applyPokemonFont(30f));
 		startButton.setBackground(Color.WHITE);
 		gbc.insets = new Insets(150, 0, 0, 0);
-		startButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (LoadNSave.checkIfLong2("saves/characters")==false) {
-					JLabel clickLoad = new JLabel("<html>You must load at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
-					clickLoad.setFont(applyPokemonFont(30f));
-					clickLoad.setForeground(Color.RED);
-					gbc.insets = new Insets(150, 700, 0, 0);
-					startPanel.add(clickLoad, gbc);
-					updateBackground(startBackgroundLabel, startPanel);
-				}
-				else {
-					startPanel.removeAll();
-					mainFrame.remove(startPanel);
-					squadSelectionMenu(Player.p1, 0);
-				}
-			}
-		});
 		startPanel.add(startButton, gbc);
 		
 		JButton quitButton = new JButton("      Quit      ");
 		quitButton.setFont(applyPokemonFont(30f));
 		quitButton.setBackground(Color.WHITE);
 		gbc.insets = new Insets(350, 0, 0, 0);
-		quitButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				mainFrame.setVisible(false);
-				System.exit(0);
-			}
-		});
 		startPanel.add(quitButton, gbc);
 		
 		JButton loadButton = new JButton("     Load     ");
 		loadButton.setFont(applyPokemonFont(30f));
 		loadButton.setBackground(Color.WHITE);
 		gbc.insets = new Insets(250, 0, 0, 0);
-		loadButton.addActionListener(new ActionListener() {
+		startPanel.add(loadButton, gbc);
+		
+		//BUTTON INPUT
+		startButton.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				if (LoadNSave.checkIfLong2("saves/characters")==false) {
+					
+					JLabel clickLoad = new JLabel("<html>You must load at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
+					clickLoad.setFont(applyPokemonFont(30f));
+					clickLoad.setForeground(Color.RED);
+					gbc.insets = new Insets(150, 700, 0, 0);
+					startPanel.add(clickLoad, gbc);
+					
+					updateBackground(startBackgroundLabel, startPanel);
+					
+				}
+				else {
+					
+					startPanel.removeAll();
+					mainFrame.remove(startPanel);
+					squadSelectionMenu(Player.p1, 0);
+					
+				}
+			}
+		});
+		
+		quitButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				mainFrame.setVisible(false);
+				System.exit(0);
+				
+			}
+		});
+		
+		loadButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
 				startPanel.removeAll();
 				mainFrame.remove(startPanel);
 				loadMenu();
+				
 			}
 		});
-		startPanel.add(loadButton, gbc);
 		
+		//FRAME SETTING
 		updateBackground(startBackgroundLabel, startPanel);
-		
 		mainFrame.add(startPanel);
 		mainFrame.revalidate();
 		mainFrame.repaint();
 	}
 	
 	public void loadMenu() {
-		JPanel loadPanel = new JPanel(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
 		
-		gbc.gridx = 0;
-		gbc.gridy = 0;
+		//MENU SETTING
+		JPanel loadPanel = new JPanel(new GridBagLayout());
 		
 		JLabel titleLabel = new JLabel("LOAD MENU'");
 		titleLabel.setFont(applyPokemonFont(100f));
@@ -167,39 +186,40 @@ public class MainMenu {
 		gbc.insets = new Insets(0, 0, 500, 1000);
 		loadPanel.add(profilesLabel, gbc);
 		
+		
 		int position=300;
 		int number=1;
 		
 		for (File character : LoadNSave.getDirFiles()) {
 			
-			gbc.insets = new Insets(0, 0, position, 1000);
 			JButton characterButton = new JButton(number+". "+character.getName().substring(0, character.getName().length()-4));
 			characterButton.setFont(applyPokemonFont(30f));
 			characterButton.setBackground(Color.WHITE);
+			gbc.insets = new Insets(0, 0, position, 1000);
 			loadPanel.add(characterButton, gbc);
 			
-			gbc.insets = new Insets(0, 0, position, 600);
 			JButton chooseP1Button = new JButton("Set as Player 1");
 			chooseP1Button.setFont(applyPokemonFont(30f));
-			chooseP1Button.setForeground(Color.WHITE);
 			chooseP1Button.setBackground(Color.BLUE);
-			chooseP1Button.setVisible(false);
+			chooseP1Button.setForeground(Color.WHITE);
+			gbc.insets = new Insets(0, 0, position, 600);
 			loadPanel.add(chooseP1Button, gbc);
+			chooseP1Button.setVisible(false);
 			
-			gbc.insets = new Insets(0, 0, position, 200);
 			JButton chooseP2Button = new JButton("Set as Player 2");
 			chooseP2Button.setFont(applyPokemonFont(30f));
-			chooseP2Button.setForeground(Color.WHITE);
 			chooseP2Button.setBackground(Color.RED);
-			chooseP2Button.setVisible(false);
+			chooseP2Button.setForeground(Color.WHITE);
+			gbc.insets = new Insets(0, 0, position, 200);
 			loadPanel.add(chooseP2Button, gbc);
+			chooseP2Button.setVisible(false);
 			
-			gbc.insets = new Insets(0, 200, position, 0);
 			JButton viewProfileButton = new JButton("View profile");
 			viewProfileButton.setFont(applyPokemonFont(30f));
 			viewProfileButton.setBackground(Color.WHITE);
-			viewProfileButton.setVisible(false);
+			gbc.insets = new Insets(0, 200, position, 0);
 			loadPanel.add(viewProfileButton, gbc);
+			viewProfileButton.setVisible(false);
 			
 			JLabel profile1LoadedLabel = new JLabel("Correctly loaded as Player 1!");
 			profile1LoadedLabel.setFont(applyPokemonFont(30f));
@@ -215,10 +235,11 @@ public class MainMenu {
 			loadPanel.add(profile2LoadedLabel, gbc);
 			profile2LoadedLabel.setVisible(false);
 			
-			
 			number++;
 			position=position-200;
+			
 			characterButton.addActionListener(new ActionListener() {
+				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					chooseP1Button.setVisible(true);
@@ -226,11 +247,14 @@ public class MainMenu {
 					viewProfileButton.setVisible(true);
 				}
 			});
+			
 			chooseP1Button.addActionListener(new ActionListener() {
+				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
 						LoadNSave.load(character.getName().substring(0, character.getName().length()-4), Player.p1);
+						
 						profile2LoadedLabel.setVisible(false);
 						profile1LoadedLabel.setVisible(true);
 					} catch (IOException e1) {
@@ -239,11 +263,14 @@ public class MainMenu {
 					}
 				}
 			});
+			
 			chooseP2Button.addActionListener(new ActionListener() {
+				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					try {
 						LoadNSave.load(character.getName().substring(0, character.getName().length()-4), Player.p2);
+						
 						profile2LoadedLabel.setVisible(true);
 						profile1LoadedLabel.setVisible(false);
 					} catch (IOException e1) {
@@ -254,6 +281,7 @@ public class MainMenu {
 			});
 			
 			viewProfileButton.addActionListener(new ActionListener() {
+				
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					loadPanel.removeAll();
@@ -263,6 +291,7 @@ public class MainMenu {
 			});
 			
 		}
+		
 		JTextField profileName = new JTextField();
 		profileName.setBackground(Color.WHITE);
 		profileName.setForeground(Color.BLACK);
@@ -275,9 +304,19 @@ public class MainMenu {
 		createProfileButton.setFont(applyPokemonFont(30f));
 		createProfileButton.setBackground(Color.WHITE);
 		gbc.insets = new Insets(0, 120, 0, 0);
+		loadPanel.add(createProfileButton, gbc);
+		
+		JButton back = new JButton("Back");
+		back.setFont(applyPokemonFont(40f));
+		back.setBackground(Color.WHITE);
+		gbc.insets = new Insets(600,0,0,0);
+		loadPanel.add(back, gbc);
+		
 		createProfileButton.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				if (profileName.getText().length()==0) {
 					JLabel notPossible = new JLabel("You must choose a nickname");
 					notPossible.setFont(applyPokemonFont(30f));
@@ -286,6 +325,7 @@ public class MainMenu {
 					loadPanel.add(notPossible, gbc);
 					updateBackground(loadBackgroundLabel, loadPanel);
 				}
+				
 				else if (profileName.getText().length()>10) {
 					JLabel notPossible = new JLabel("Nickname is too long");
 					notPossible.setFont(applyPokemonFont(30f));
@@ -294,6 +334,7 @@ public class MainMenu {
 					loadPanel.add(notPossible, gbc);
 					updateBackground(loadBackgroundLabel, loadPanel);
 				}
+				
 				else {
 					LoadNSave.create(profileName.getText());
 					JLabel success = new JLabel("Profile created! To see it, restart the game.");
@@ -305,12 +346,7 @@ public class MainMenu {
 				}
 			}
 		});
-		loadPanel.add(createProfileButton, gbc);
 		
-		JButton back = new JButton("Back");
-		back.setFont(applyPokemonFont(40f));
-		back.setBackground(Color.WHITE);
-		gbc.insets = new Insets(600,0,0,0);
 		back.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -319,7 +355,6 @@ public class MainMenu {
 				startMenu();
 			}
 		});
-		loadPanel.add(back, gbc);
 		
 		updateBackground(loadBackgroundLabel, loadPanel);
 		
@@ -329,23 +364,21 @@ public class MainMenu {
 	}
 	
 	public void viewProfileMenu(String characterName) {
+		
 		JPanel profilePanel = new JPanel(new GridBagLayout());
-		GridBagConstraints gbc = new GridBagConstraints();
 		
-		gbc.gridx=0;
-		gbc.gridy=0;
-		
-		JLabel title =  new JLabel(characterName+"'s profile stats");
+		JLabel title =  new JLabel("Profile stats");
 		title.setFont(applyPokemonFont(100f));
 		title.setForeground(Color.WHITE);
 		gbc.insets = new Insets(0, 0, 500, 600);
 		profilePanel.add(title, gbc);
-		updateBackground(profileBackgroundLabel, profilePanel);
 		
 		JButton back = new JButton("Back");
 		back.setFont(applyPokemonFont(40f));
 		back.setBackground(Color.WHITE);
 		gbc.insets = new Insets(600,0,0,800);
+		profilePanel.add(back, gbc);
+		
 		back.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -354,8 +387,6 @@ public class MainMenu {
 				loadMenu();
 			}
 		});
-		profilePanel.add(back, gbc);
-		
 		
 		try {
 			JLabel info =  new JLabel(LoadNSave.read(characterName));
@@ -363,7 +394,6 @@ public class MainMenu {
 			info.setForeground(Color.WHITE);
 			gbc.insets = new Insets(0, 0, 0, 600);
 			profilePanel.add(info, gbc);
-			updateBackground(profileBackgroundLabel, profilePanel);
 		} catch (IOException e) {
 			System.out.println("I can't view this info :(");
 			e.printStackTrace();
@@ -388,10 +418,8 @@ public class MainMenu {
 			squadSelectionMenu(Player.p2, 0);
 		}
 		else {
+			
 			JPanel squadSelectionPanel = new JPanel(new GridBagLayout());
-			GridBagConstraints gbc = new GridBagConstraints();
-			gbc.gridx = 0;
-			gbc.gridy = 0;
 			
 			JLabel chooseLabel = new JLabel("Hello "+p.getNickname()+ ", please choose pokémon number " + (i+1));
 			chooseLabel.setFont(applyPokemonFont(70f));
@@ -432,6 +460,7 @@ public class MainMenu {
 					}
 				}
 			});
+			
 			chooseSquirtle.addActionListener(new ActionListener() {
 				@Override 
 				public void actionPerformed(ActionEvent e) {
@@ -447,6 +476,7 @@ public class MainMenu {
 					}
 				}
 			});
+			
 			chooseCharmander.addActionListener(new ActionListener() {
 				@Override 
 				public void actionPerformed(ActionEvent e) {
@@ -473,12 +503,17 @@ public class MainMenu {
 	
 	public void choiceMenu(Player p) {
 		
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
+		try {
+			updatePlayerInfo(Player.p1);
+		} catch (FontFormatException | IOException e) {
+			e.printStackTrace();
+		}
 		
-		updatePlayerInfo(Player.p1);
-		updatePlayerInfo(Player.p2);
+		try {
+			updatePlayerInfo(Player.p2);
+		} catch (FontFormatException | IOException e) {
+			e.printStackTrace();
+		}
 		
 		JLabel battleCounterLabel = new JLabel("Match n."+battleCounter);
 		battleCounterLabel.setFont(applyPokemonFont(30f));
@@ -529,7 +564,6 @@ public class MainMenu {
 		battlePanel.add(moveButton4, gbc);
 		moveButton4.setVisible(false);
 		
-		
 		JButton back = new JButton("Back");
 		back.setFont(applyPokemonFont(25f));
 		back.setBackground(Color.WHITE);
@@ -573,36 +607,43 @@ public class MainMenu {
 		}
 		
 		fightButton.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fightButton.setVisible(false);
 				surrenderButton.setVisible(false);
 				changePokemonButton.setVisible(false);
+				
 				moveButton1.setVisible(true);
 				moveButton2.setVisible(true);
 				moveButton3.setVisible(true);
 				moveButton4.setVisible(true);
 				back.setVisible(true);
+				
 				mainFrame.revalidate();
 				mainFrame.repaint();
 			}
 		});
 		
 		changePokemonButton.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fightButton.setVisible(false);
 				surrenderButton.setVisible(false);
 				changePokemonButton.setVisible(false);
+				
 				back.setVisible(true);
 				pk1.setVisible(true);
 				pk2.setVisible(true);
+				
 				mainFrame.revalidate();
 				mainFrame.repaint();
 		}
 		});
 		
 		pk1.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				p.setChoice(PokeMove.switchPokemon);
@@ -612,6 +653,7 @@ public class MainMenu {
 						pk1.setEnabled(false);
 						pk2.setEnabled(false);
 						back.setEnabled(false);
+						
 						Player.p2.setChoice(PokeMove.empty);
 						turnMenu(Turn.speedCheck(), 500, false);
 					}
@@ -626,6 +668,7 @@ public class MainMenu {
 						pk1.setEnabled(false);
 						pk2.setEnabled(false);
 						back.setEnabled(false);
+						
 						Player.p1.setChoice(PokeMove.empty);
 						turnMenu(Turn.speedCheck(), 500, false);
 					}
@@ -633,6 +676,7 @@ public class MainMenu {
 						pk1.setEnabled(false);
 						pk2.setEnabled(false);
 						back.setEnabled(false);
+						
 						turnMenu(Turn.speedCheck(), 500, false);
 					}
 				}
@@ -641,6 +685,7 @@ public class MainMenu {
 		});
 		
 		pk2.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				p.setChoice(PokeMove.switchPokemon);
@@ -650,6 +695,7 @@ public class MainMenu {
 						pk1.setEnabled(false);
 						pk2.setEnabled(false);
 						back.setEnabled(false);
+						
 						Player.p2.setChoice(PokeMove.empty);
 						turnMenu(Turn.speedCheck(), 500, false);
 					}
@@ -664,6 +710,7 @@ public class MainMenu {
 						pk1.setEnabled(false);
 						pk2.setEnabled(false);
 						back.setEnabled(false);
+						
 						Player.p1.setChoice(PokeMove.empty);
 						turnMenu(Turn.speedCheck(), 500, false);
 					}
@@ -671,6 +718,7 @@ public class MainMenu {
 						pk1.setEnabled(false);
 						pk2.setEnabled(false);
 						back.setEnabled(false);
+						
 						turnMenu(Turn.speedCheck(), 500, false);
 					}
 				}
@@ -679,11 +727,13 @@ public class MainMenu {
 		});
 		
 		back.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {	
 				fightButton.setVisible(true);
 				surrenderButton.setVisible(true);
 				changePokemonButton.setVisible(true);
+				
 				moveButton1.setVisible(false);
 				moveButton2.setVisible(false);
 				moveButton3.setVisible(false);
@@ -698,6 +748,7 @@ public class MainMenu {
 		});
 		
 		moveButton1.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				p.setChoice(p.getCurrentPokemon().getMove1());
@@ -711,12 +762,14 @@ public class MainMenu {
 					moveButton3.setEnabled(false);
 					moveButton4.setEnabled(false);
 					back.setEnabled(false);
+					
 					turnMenu(Turn.speedCheck(), 500, false);
 				}
 			}
 		});
 		
 		moveButton2.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				p.setChoice(p.getCurrentPokemon().getMove2());
@@ -730,12 +783,14 @@ public class MainMenu {
 					moveButton3.setEnabled(false);
 					moveButton4.setEnabled(false);
 					back.setEnabled(false);
+					
 					turnMenu(Turn.speedCheck(), 500, false);
 				}
 			}
 		});
 		
 		moveButton3.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				p.setChoice(p.getCurrentPokemon().getMove3());
@@ -749,12 +804,14 @@ public class MainMenu {
 					moveButton3.setEnabled(false);
 					moveButton4.setEnabled(false);
 					back.setEnabled(false);
+					
 					turnMenu(Turn.speedCheck(), 500, false);
 				}
 			}
 		});
 		
 		moveButton4.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				p.setChoice(p.getCurrentPokemon().getMove4());
@@ -768,12 +825,14 @@ public class MainMenu {
 					moveButton3.setEnabled(false);
 					moveButton4.setEnabled(false);
 					back.setEnabled(false);
+					
 					turnMenu(Turn.speedCheck(), 500, false);
 				}
 			}
 		});
 		
 		surrenderButton.addActionListener(new ActionListener() {
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				surrenderButton.setEnabled(false);
@@ -787,50 +846,58 @@ public class MainMenu {
 					Pokemon.resetTeam(p);
 					finishMenu("match", otherP, p);
 				}	
+				
 				else {
+					int gamePlayed1 = Player.p1.getGamesPlayed();
+					int gamePlayed2 = Player.p2.getGamesPlayed();
+					Player.p1.setGamesPlayed(gamePlayed1+1);
+					Player.p2.setGamesPlayed(gamePlayed2+1);
+					
 					JLabel loseLabel = new JLabel ("You Lose");
 					JLabel winLabel = new JLabel ("You Win!");
 					winLabel.setFont(applyPokemonFont(70f));
 					winLabel.setForeground(Color.GREEN);
 					loseLabel.setFont(applyPokemonFont(70f));
 					loseLabel.setForeground(Color.RED);
-					if (p==Player.p2 && p.getLoses()==2) {
-						int gameLost = p.getGamesLost();
-						int gamePlayed1 = p.getGamesPlayed();
-						int gamePlayed2 = otherP.getGamesPlayed();
-						int gameWon = otherP.getGamesWon();						
+					
+					if (Player.p2.getLoses()==2) {
+						int gameLost = Player.p2.getGamesLost();
+						int gameWon = Player.p1.getGamesWon();	
+						
 						p.setGamesLost(gameLost+1);
 						p.setGamesPlayed(gamePlayed1+1);
 						otherP.setGamesWon(gameWon+1);
 						otherP.setGamesPlayed(gamePlayed2+1);
+						
 						LoadNSave.save(p);
 						LoadNSave.save(otherP);
+						
 						gbc.insets = new Insets(50, 420, 0, 0);
-						gbc.gridx = 0;
-						gbc.gridy = 0;
 						battlePanel.add(loseLabel, gbc);
 						gbc.insets = new Insets(450, 0, 0, 500);
 						battlePanel.add(winLabel, gbc);
+						
 						updateBackground(battleBackgroundLabel, battlePanel);
 						finishMenu("end", Player.p1, Player.p2);
 					}
-					else {
-						int gameLost = otherP.getGamesLost();
-						int gamePlayed1 = p.getGamesPlayed();
-						int gamePlayed2 = otherP.getGamesPlayed();
-						int gameWon = p.getGamesWon();						
-						otherP.setGamesLost(gameLost+1);
-						otherP.setGamesPlayed(gamePlayed2+1);
-						p.setGamesWon(gameWon+1);
-						p.setGamesPlayed(gamePlayed1+1);
-						LoadNSave.save(p);
-						LoadNSave.save(otherP);
+					
+					else if (Player.p1.getLoses()==2){
+						
+						int gameLost = Player.p1.getGamesLost();
+						int gameWon = Player.p2.getGamesWon();	
+						
+						Player.p1.setGamesLost(gameLost+1);
+						Player.p2.setGamesWon(gameWon+1);
+						
+						LoadNSave.save(Player.p1);
+						LoadNSave.save(Player.p2);
+						
 						gbc.insets = new Insets(450, 0, 0, 500);
-						gbc.gridx = 0;
-						gbc.gridy = 0;
 						battlePanel.add(loseLabel, gbc);
+						
 						gbc.insets = new Insets(50, 420, 0, 0);
 						battlePanel.add(winLabel, gbc);
+						
 						updateBackground(battleBackgroundLabel, battlePanel);
 						finishMenu("end", Player.p2, Player.p1);
 					}
@@ -840,8 +907,7 @@ public class MainMenu {
 			
 		updateSprites();
 		updateBackground(battleBackgroundLabel, battlePanel);
-		
-		//Frame settings
+
 		mainFrame.add(battlePanel);
 		mainFrame.revalidate();
 		mainFrame.repaint();
@@ -946,10 +1012,6 @@ public class MainMenu {
 
 	public void turnMenu(Player p, int position, boolean stop) {
 		String moveCategory = p.getChoice().getCategory();
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		
 		Player otherP = Player.reversePlayer(p);
 
 		switch(moveCategory) {
@@ -959,6 +1021,7 @@ public class MainMenu {
 			Timer t1 = new Timer();
 			TimerTask task1 = new TimerTask() {
 				int counter = 3;
+				
 				@Override
 				public void run() {
 					
@@ -971,16 +1034,24 @@ public class MainMenu {
 						updateBackground(battleBackgroundLabel, battlePanel);
 						counter--;
 					}
+					
 					else if (counter==2) {
 						JLabel label2 = new JLabel("<html>"+otherP.getNickname()+"'s "+otherP.getCurrentPokemon().getName()+" hp are now "+(int)otherP.getCurrentPokemon().getHp()+"</html>");
 						label2.setFont(applyPokemonFont(30f));
 						label2.setForeground(Color.BLACK);
 						gbc.insets = new Insets(0, 0, position-110, 800);
 						battlePanel.add(label2, gbc);
-						updatePlayerInfo(otherP);
+						
+						try {
+							updatePlayerInfo(otherP);
+						} catch (FontFormatException | IOException e) {
+							e.printStackTrace();
+						}
+						
 						updateBackground(battleBackgroundLabel, battlePanel);
 						counter--;
 					}
+					
 					else if (counter==1) {
 						if ((int)otherP.getCurrentPokemon().getHp()<=0) {
 							JLabel loseLabel = new JLabel (otherP.getCurrentPokemon().getName()+" is dead!");
@@ -1003,6 +1074,7 @@ public class MainMenu {
 								counter--;
 							}
 						}
+						
 						else if (stop==true) {
 							battlePanel.removeAll();
 							updateBackground(battleBackgroundLabel, battlePanel);
@@ -1016,6 +1088,7 @@ public class MainMenu {
 							turnMenu(Player.reversePlayer(p), 300, true);
 						}	
 					}
+					
 					else if (counter==0) {
 					battlePanel.removeAll();
 					updateBackground(battleBackgroundLabel, battlePanel);
@@ -1037,8 +1110,10 @@ public class MainMenu {
 			Timer t2 = new Timer();
 			TimerTask task2 = new TimerTask() {
 				int counter = 3;
+				
 				@Override
 				public void run() {
+					
 					if (counter == 3) {
 						JLabel label3 = new JLabel("<html>"+p.getNickname()+"'s "+p.getCurrentPokemon().getName()+" uses "+p.getChoice().getName()+"</html>");
 						label3.setFont(applyPokemonFont(30f));
@@ -1048,16 +1123,24 @@ public class MainMenu {
 						updateBackground(battleBackgroundLabel, battlePanel);
 						counter--;
 					}
+					
 					else if (counter==2) {
 						JLabel label4 = new JLabel("<html>"+otherP.getNickname()+"'s "+otherP.getCurrentPokemon().getName()+" "+p.getChoice().getStatModifier()+" has changed by "+p.getChoice().getStatSign()+"1</html>");
 						label4.setFont(applyPokemonFont(30f));
 						label4.setForeground(Color.BLACK);
 						gbc.insets = new Insets(0, 0, position-50, 800);
 						battlePanel.add(label4, gbc);
-						updatePlayerInfo(otherP);
+						
+						try {
+							updatePlayerInfo(otherP);
+						} catch (FontFormatException | IOException e) {
+							e.printStackTrace();
+						}
+						
 						updateBackground(battleBackgroundLabel, battlePanel);
 						counter--;
 					}
+					
 					else if (counter==1) {
 						if (stop==true) {
 							battlePanel.removeAll();
@@ -1078,6 +1161,7 @@ public class MainMenu {
 			Timer t3 = new Timer();
 			TimerTask task3 = new TimerTask() {
 				int counter = 3;
+				
 				@Override
 				public void run() {
 					
@@ -1091,6 +1175,7 @@ public class MainMenu {
 							updateBackground(battleBackgroundLabel, battlePanel);
 							counter--;
 						}
+						
 						else {
 							JLabel label5 = new JLabel("<html>"+p.getNickname()+"'s "+p.getCurrentPokemon().getName()+" switched to "+p.getPokemon(chosenPosition2).getName()+"!</html>");
 							label5.setFont(applyPokemonFont(30f));
@@ -1101,6 +1186,7 @@ public class MainMenu {
 							counter--;
 						}
 					}
+					
 					else if (counter==2) {
 						if (p==Player.p1) {
 							battlePanel.remove(pokemon1[p.getCurrentPosition()]);
@@ -1111,11 +1197,18 @@ public class MainMenu {
 							p.setCurrentPokemon(chosenPosition2);
 						}
 						p.setOtherPositions(p);
-						updatePlayerInfo(p);
+						
+						try {
+							updatePlayerInfo(p);
+						} catch (FontFormatException | IOException e) {
+							e.printStackTrace();
+						}
+						
 						updateSprites();
 						updateBackground(battleBackgroundLabel, battlePanel);
 						counter--;
 					}
+					
 					else if (counter==1) {
 						if (stop==true) {
 						battlePanel.removeAll();
@@ -1140,26 +1233,23 @@ public class MainMenu {
 		}	
 	}
 
-	//SETTINGS METHODS
+	//UTILITY METHODS
+	
 	public void updateBackground(JLabel setLabel, JPanel setPanel) {
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
+		gbc.insets = new Insets(0, 0, 0, 0);
 		setPanel.add(setLabel, gbc);
 		mainFrame.revalidate();
 		mainFrame.repaint();
 	}
 	
-	public void updatePlayerInfo(Player p) {
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridx = 0;
-		gbc.gridy = 0;
+	public void updatePlayerInfo(Player p) throws FontFormatException, IOException {
 		if (p==Player.p1) {
 			player1Info.setText("<html>"+p.getCurrentPokemon().getName() + "&nbsp;Lv."+(int)p.getCurrentPokemon().getLevel() + "<br>"+(int)p.getCurrentPokemon().getHp() + " HP</html>");
 			player1Info.setFont(applyPokemonFont(35f));
 			player1Info.setForeground(Color.BLACK);
 			gbc.insets = new Insets(100, 0, 0, 800);
 			battlePanel.add(player1Info, gbc);
+			
 			mainFrame.revalidate();
 			mainFrame.repaint();
 		}
@@ -1169,32 +1259,32 @@ public class MainMenu {
 			player2Info.setForeground(Color.BLACK);
 			gbc.insets = new Insets(0, 200, 300, 0);
 			battlePanel.add(player2Info, gbc);
+			
 			mainFrame.revalidate();
 			mainFrame.repaint();
 		}
 	}
 	
-	public static Font applyPokemonFont(float size) {
+	public Font applyPokemonFont(float size)  {
 		try {
+			String filepath = getClass().getResource("/fonts/pokemon_fire_red.ttf").getPath(); 
+			Font fireRed = Font.createFont(Font.TRUETYPE_FONT, new File(filepath));
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			Font fireRed = Font.createFont(Font.TRUETYPE_FONT, new File("src/fonts/pokemon_fire_red.ttf"));
 			ge.registerFont(fireRed);
 			return fireRed.deriveFont(size);
-		} catch (IOException|FontFormatException e) {
-		     //Handle exception
-			System.out.print("file not found");
+		} catch (FontFormatException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
-	
+
 	public void updateSprites() {
-		GridBagConstraints gbc = new GridBagConstraints();
-		gbc.gridy = 0;
-		gbc.gridx = 0;
 		gbc.insets = new Insets(280, 0, 0, 500);
 		battlePanel.add(pokemon1[Player.p1.getCurrentPosition()], gbc);
-		gbc.gridy = 0;
-		gbc.gridx = 0;
+		
 		gbc.insets = new Insets(0, 420, 100, 0);
 		battlePanel.add(pokemon2[Player.p2.getCurrentPosition()], gbc);
 	}
