@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class LoadNSave {
 	
-	private static File charactersDir = new File("saves/characters");
+	private static File charactersDir = new File("saves/");
 	private static File[] charactersDirFiles = charactersDir.listFiles();
 	
 	static File[] getDirFiles() {
@@ -14,7 +14,7 @@ public class LoadNSave {
 	
 	public static void create(String characterName) {
 		try {
-			File createdData = new File("saves/characters/"+characterName+".txt");
+			File createdData = new File("saves/"+characterName+".txt");
 			FileWriter scriviBene = new FileWriter(createdData.getPath());
 			scriviBene.write("Nickname: "+characterName+"\nGames played: 0\nWins: 0\nLoses: 0");
 			scriviBene.close();
@@ -28,7 +28,7 @@ public class LoadNSave {
 	
 	public static void save(Player p) {
 		try {
-			File savedData = new File("saves/characters/"+p.getNickname()+".txt");
+			File savedData = new File("saves/"+p.getNickname()+".txt");
 			FileWriter scriviBene2 = new FileWriter(savedData.getPath());
 			
 				scriviBene2.write("Nickname: "+p.getNickname()+"\nGames played: "+p.getGamesPlayed()+"\nWins: "+p.getGamesWon()+"\nLoses: "+p.getGamesLost());
@@ -42,7 +42,7 @@ public class LoadNSave {
 	}
 	
 	public static void load(String character, Player p) throws IOException {
-		File loadedData = new File("saves/characters/"+character+".txt");
+		File loadedData = new File("saves/"+character+".txt");
 		FileReader leggiBene = new FileReader(loadedData.getPath());
 		String path = "";
 		int data = leggiBene.read();
@@ -81,7 +81,7 @@ public class LoadNSave {
 	}
 	
 	public static String read(String character) throws IOException {
-		File loadedData = new File("saves/characters/"+character+".txt");
+		File loadedData = new File("saves/"+character+".txt");
 		FileReader leggiBene = new FileReader(loadedData.getPath());
 		String path = "<html>";
 		int data = leggiBene.read();

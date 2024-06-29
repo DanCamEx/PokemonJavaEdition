@@ -118,7 +118,7 @@ public class MainMenu {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if (LoadNSave.checkIfLong2("saves/characters")==false) {
+				if (LoadNSave.checkIfLong2("saves")==false) {
 					
 					JLabel clickLoad = new JLabel("<html>You must load at least two profiles in order to start the game. <br> Please go to \"load\" and create them.</html>");
 					clickLoad.setFont(applyPokemonFont(30f));
