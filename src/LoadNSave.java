@@ -8,7 +8,7 @@ public class LoadNSave {
 	private static File charactersDir = new File("saves/");
 	private static File[] charactersDirFiles = charactersDir.listFiles();
 	
-	static File[] getDirFiles() {
+	public static File[] getDirFiles() {
 		return charactersDirFiles;
 	}
 	

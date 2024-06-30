@@ -1016,7 +1016,17 @@ public class MainMenu {
 		switch(moveCategory) {
 			
 		case("special"): case("physical"): 
-			Turn.attack(p);
+			String missOrNot;
+			String nowOrStill;
+			if (Turn.checkMiss(p.getChoice())=="move missed!") {
+					missOrNot="Move missed!";
+					nowOrStill="still";
+			}
+			else {
+				Turn.attack(p);
+				missOrNot = Turn.checkType(p.getChoice(), otherP.getCurrentPokemon());
+				nowOrStill="now";
+			}
 			Timer t1 = new Timer();
 			TimerTask task1 = new TimerTask() {
 				int counter = 3;
@@ -1025,7 +1035,7 @@ public class MainMenu {
 				public void run() {
 					
 					if (counter==3) {
-						JLabel label1 = new JLabel("<html>"+p.getNickname()+"'s "+p.getCurrentPokemon().getName()+" uses "+p.getChoice().getName()+"<br>"+Turn.checkType(p.getChoice(), otherP.getCurrentPokemon())+"</html>");
+						JLabel label1 = new JLabel("<html>"+p.getNickname()+"'s "+p.getCurrentPokemon().getName()+" uses "+p.getChoice().getName()+"<br>"+missOrNot+"</html>");
 						label1.setFont(applyPokemonFont(35f));
 						label1.setForeground(Color.WHITE);
 						gbc.insets = new Insets(0, 0, position, 750);
@@ -1035,7 +1045,7 @@ public class MainMenu {
 					}
 					
 					else if (counter==2) {
-						JLabel label2 = new JLabel("<html>"+otherP.getNickname()+"'s "+otherP.getCurrentPokemon().getName()+" hp are now "+(int)otherP.getCurrentPokemon().getHp()+"</html>");
+						JLabel label2 = new JLabel("<html>"+otherP.getNickname()+"'s "+otherP.getCurrentPokemon().getName()+" hp are "+nowOrStill+" "+(int)otherP.getCurrentPokemon().getHp()+"</html>");
 						label2.setFont(applyPokemonFont(35f));
 						label2.setForeground(Color.WHITE);
 						gbc.insets = new Insets(0, 0, position-110, 750);

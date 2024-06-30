@@ -36,7 +36,9 @@ public class PokeMove {
 	String getType() {
 		return type;
 	}
-	
+	double getAccuracy() {
+		return accuracy;
+	}
 	
 	//Moves List
 	

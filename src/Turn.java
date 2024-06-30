@@ -101,6 +101,17 @@ public class Turn {
 		}
 	}
 	
+	public static String checkMiss(PokeMove pm) {
+		double accuracy = pm.getAccuracy();
+		Random r = new Random();
+		int i = r.nextInt(1, 101);
+		if (i<=accuracy) {
+			return ("");
+		}
+		else {
+			return("move missed!");
+		}
+	}
 	
 	
 	
