@@ -1,3 +1,5 @@
+package pokemonjavaedition;
+
 /**
  * It sets up all the characteristics that a player has when playing a pokémon game, such as his pokémon squad,
  * his nickname in the game, the choice that he make in a turn, ecc...

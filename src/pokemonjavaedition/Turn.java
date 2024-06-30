@@ -1,3 +1,4 @@
+package pokemonjavaedition;
 import java.util.Random;
 
 public class Turn {

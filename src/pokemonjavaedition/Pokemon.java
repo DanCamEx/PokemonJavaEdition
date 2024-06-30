@@ -1,3 +1,4 @@
+package pokemonjavaedition;
 import javax.swing.ImageIcon;
 
 public class Pokemon {

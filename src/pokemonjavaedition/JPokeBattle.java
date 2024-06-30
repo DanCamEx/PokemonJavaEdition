@@ -1,3 +1,4 @@
+package pokemonjavaedition;
 
 public class JPokeBattle {
 	
