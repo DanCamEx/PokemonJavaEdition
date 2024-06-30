@@ -566,7 +566,7 @@ public class MainMenu {
 		JButton back = new JButton("Back");
 		back.setFont(applyPokemonFont(30f));
 		back.setBackground(Color.WHITE);
-		gbc.insets = new Insets(670,450,0,200);
+		gbc.insets = new Insets(670,450,0,250);
 		battlePanel.add(back, gbc);
 		back.setVisible(false);
 		
