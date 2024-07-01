@@ -3,16 +3,35 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/**
+ * It manages the saving and loading system of the game. The saving files are created with the .txt extension, as they only need to contain 4 info of the character: his name and the games played, won and lost.
+ */
 public class LoadNSave {
 	
+	/**
+	 * The directory which contains the saves of the game.
+	 */
 	private static File charactersDir = new File("saves/");
+	
+	/**
+	 * The list of all the files contained in the directory charactersDir.
+	 * @see #charactersDir
+	 */
 	private static File[] charactersDirFiles = charactersDir.listFiles();
 	
+	/**
+	 * Gets all the saves of the game.
+	 * @return an array of files, with each of its elements representing a different character's save in the game.
+	 */
 	public static File[] getDirFiles() {
 		return charactersDirFiles;
 	}
 	
+	/**
+	 * It creates a new save with the .txt extension naming it with the nickname of the character choosen while creating it form the corresponding menu.
+	 * The save already contains all the info with a default value. In this case, 0.
+	 * @param characterName the name of the save and also the nickname of the profile.
+	 */
 	public static void create(String characterName) {
 		try {
 			File createdData = new File("saves/"+characterName+".txt");
@@ -27,6 +46,10 @@ public class LoadNSave {
 		}
 	}
 	
+	/**
+	 * It rewrites the file named as the nickname associated with the player, adding all the new info acquired when a battle ends, like the fact that now the profile has win a game, lost a game, or just played it.
+	 * @param p the player of which nickname is taken to find which file have to be rewritten.
+	 */
 	public static void save(Player p) {
 		try {
 			File savedData = new File("saves/"+p.getNickname()+".txt");
@@ -42,6 +65,12 @@ public class LoadNSave {
 		}
 	}
 	
+	/**
+	 * It sets all the parameters in a save file to the player 1 or player 2, reading the file info needed to be set. This info are then set as player attributes.
+	 * @param character the name of the file to be read
+	 * @param p the player where you want to set all the info of a save
+	 * @throws IOException if something goes wrong :(
+	 */
 	public static void load(String character, Player p) throws IOException {
 		File loadedData = new File("saves/"+character+".txt");
 		FileReader leggiBene = new FileReader(loadedData.getPath());

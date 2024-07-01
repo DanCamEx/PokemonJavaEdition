@@ -22,45 +22,156 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+/**
+ * It creates all the menus of the game and use all the others classes to make everything work. It's the core of the game.
+ */
 public class MainMenu {
 	
+	/**
+	 * The frame that is used in all the menus of the game.
+	 */
 	private JFrame mainFrame = new JFrame();
 	
+	/**
+	 * It's the panel used during the fight in the game, set as a global attribute 'cause it's used in some methods.
+	 */
 	private JPanel battlePanel = new JPanel(new GridBagLayout());
 	
+	/**
+	 * An array of JLabels which represents the sprites of the player 1's pokemon squad, used to make them appear during the fight.
+	 * @see #updateSprites()
+	 */
 	private JLabel[] pokemon1 = {new JLabel(), new JLabel(), new JLabel()};
+	
+	/**
+	 * An array of JLabels which represents the sprites of the player 2's pokemon squad, used to make them appear during the fight.
+	 * @see #updateSprites()
+	 */
 	private JLabel[] pokemon2 = {new JLabel(), new JLabel(), new JLabel()};
 	
+	/**
+	 * A JLabel which represents the player 1'nickname, his current pokemon, and its hp.
+	 * @see #updatePlayerInfo(Player)
+	 */
 	private JLabel player1Info = new JLabel();
+	
+	/**
+	 * A JLabel which represents the player 2'nickname, his current pokemon, and its hp.
+	 * @see #updatePlayerInfo(Player)
+	 */
 	private JLabel player2Info = new JLabel();
 	
+	/**
+	 * The background image used during a battle in the game
+	 * @see #updateBackground(JLabel, JPanel)
+	 */
 	private ImageIcon battleBackground = new ImageIcon(getClass().getResource("/images/battleBackground.png"));
+	
+	/**
+	 * The JLabel which contains the battlebackground, used to show the image in game.
+	 * @see #updateBackground(JLabel, JPanel)
+	 *  @see #battleBackground
+	 */
 	private JLabel battleBackgroundLabel = new JLabel(battleBackground);
 	
+	/**
+	 * The background image used at the start of the game.
+	 * @see #updateBackground(JLabel, JPanel)
+	 */
 	private ImageIcon startBackground = new ImageIcon(getClass().getResource("/images/startBackground.png"));
+	
+	/**
+	 * The JLabel which contains the startbackground, used to show the image in game.
+	 * @see #updateBackground(JLabel, JPanel)
+	 * @see #startBackground
+	 */
 	private JLabel startBackgroundLabel = new JLabel(startBackground);
 	
+	/**
+	 * The background image used when choosing the pokemon squad in the squadSelectionMenu
+	 * @see #squadSelectionMenu(Player, int)
+	 * @see #updateBackground(JLabel, JPanel)
+	 */
 	private ImageIcon squadBackground = new ImageIcon(getClass().getResource("/images/chooseStarter.jpg"));
+	
+	/**
+	 * The JLabel which contains the squadbackground, used to show the image in game.
+	 * @see #squadBackground
+	 * @see #updateBackground(JLabel, JPanel)
+	 */
 	private JLabel squadBackgroundLabel = new JLabel(squadBackground);
 	
+	/**
+	 * The background image used while creating and setting a profile in the load menu of the game.
+	 * @see #loadMenu()
+	 * @see #updateBackground(JLabel, JPanel)
+	 */
 	private ImageIcon loadBackground = new ImageIcon(getClass().getResource("/images/loadBackground.jpg"));
+	
+	/**
+	 * The JLabel which contains the loadBackground, used to show the image in game.
+	 * @see #loadBackground
+	 * @see #updateBackground(JLabel, JPanel)
+	 */
 	private JLabel loadBackgroundLabel = new JLabel(loadBackground);
 	
+	/**
+	 * The transition background image used while going from a match to another during a battle, or at its end.
+	 * @see #updateBackground(JLabel, JPanel)
+	 * @see #finishMenu(String, Player, Player)
+	 */
 	private ImageIcon transitionBackground = new ImageIcon(getClass().getResource("/images/transitionBackground.jpg"));
+	
+	/**
+	 * The JLabel which contains the transitionBackground, used to show the image in game.
+	 * @see #updateBackground(JLabel, JPanel)
+	 * @see #finishMenu(String, Player, Player)
+	 * @see #transitionBackground
+	 */
 	private JLabel transitionBackgroundLabel = new JLabel(transitionBackground);
 	
+	/**
+	 * The profile background image which is used when viewing the profile stats of a character created in the game.
+	 * @see #viewProfileMenu(String)
+	 * @see #updateBackground(JLabel, JPanel)
+	 */
 	private ImageIcon profileBackground = new ImageIcon(getClass().getResource("/images/profileBackground.jpg"));
+	
+	/**
+	 * The JLabel which contains the profileBackground, used to show the image in game.
+	 * @see #profileBackground
+	 * @see #updateBackground(JLabel, JPanel)
+	 */
 	private JLabel profileBackgroundLabel = new JLabel(profileBackground);
 	
+	/**
+	 * An int value used to change the pokemon of Player 1 while in battle, to register the position of the pokemon to be switched with the current one.
+	 * @see #turnMenu(Player, int, boolean)
+	 * @see #choiceMenu(Player)
+	 */
 	private int chosenPosition1;
+	
+	/**
+	 * An int value used to change the pokemon of Player 2 while in battle, to register the position of the pokemon to be switched with the current one.
+	 * @see #turnMenu(Player, int, boolean)
+	 * @see #choiceMenu(Player)
+	 */
 	private int chosenPosition2;
-
+	
+	/**
+	 * A value used to set the column and the raw where the components are placed in the various menus. 
+	 * It's also used for moving the object from the center of the screen to the designed location.
+	 */
 	private GridBagConstraints gbc = new GridBagConstraints();
 	
+	/**
+	 * Int value used to count the matches going on.
+	 */
 	private int battleCounter = 1;
 
-	//GUI IMPLEMENTATION
+	/**
+	 * It sets the main frame of the game, where all the panels will be placed.
+	 */
 	public MainMenu() {
 		
 		gbc.gridx = 0;
@@ -78,6 +189,9 @@ public class MainMenu {
 		mainFrame.setIconImage(gameIcon);
 	}
 	
+	/**
+	 * It adds and sets the gui for the start menu of the game, where you can start a match, or load a profile.
+	 */
 	public void startMenu() {
 		
 		//MENU SETTING
@@ -169,6 +283,9 @@ public class MainMenu {
 		mainFrame.repaint();
 	}
 	
+	/**
+	 * It adds and sets the panel for the load menu, used to create a profile for the game, view it, or set it as Player 1 or Player 2.
+	 */
 	public void loadMenu() {
 		
 		//MENU SETTING
@@ -363,6 +480,10 @@ public class MainMenu {
 		mainFrame.repaint();	
 	}
 	
+	/**
+	 * It adds and sets the panel where you can view all the stats of a profile.
+	 * @param characterName Used to search for the file with the same name to read it and write its info in the panel.
+	 */
 	public void viewProfileMenu(String characterName) {
 		
 		JPanel profilePanel = new JPanel(new GridBagLayout());
@@ -407,6 +528,11 @@ public class MainMenu {
 		
 	}
 	
+	/**
+	 * It adds and sets the panel where you can choose the squad for the next battle.
+	 * @param p the player who will choose the next pokemon
+	 * @param pokemonPosition the position where the pokemon will be set in the pokemonSquad
+	 */
 	public void squadSelectionMenu(Player p, int pokemonPosition) {
 		int i = pokemonPosition;
 	
@@ -501,6 +627,10 @@ public class MainMenu {
 		}
 	}
 	
+	/**
+	 * It adds and sets the panel where you can see the battle going on, with the sprites of the pokemon used and the classic pokemon interface.
+	 * @param p the player who will do the turn
+	 */
 	public void choiceMenu(Player p) {
 		
 		try {
@@ -915,6 +1045,12 @@ public class MainMenu {
 		
 	}
 	
+	/**
+	 * Adds and sets a panel which works as a sort of transition between a match and another and it's also used at the end of the battle.
+	 * @param finishType it can be match, or end. If match it goes to the next match of the battle. If end it ends the battle.
+	 * @param winner it's the player who won the match
+	 * @param loser it's the player who lost the match
+	 */
 	public void finishMenu(String finishType, Player winner, Player loser) {
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx=0;
@@ -1009,7 +1145,12 @@ public class MainMenu {
 	}
 	
 	
-
+	/**
+	 * It manages the choices done in the choiceMenu, showing a label which describes what's happening in that turn.
+	 * @param p The player with his choice to be analyzed
+	 * @param position the south position of the label
+	 * @param stop a boolean value to check when to stop the method in some cases.
+	 */
 	public void turnMenu(Player p, int position, boolean stop) {
 		String moveCategory = p.getChoice().getCategory();
 		Player otherP = Player.reversePlayer(p);
@@ -1245,6 +1386,11 @@ public class MainMenu {
 
 	//UTILITY METHODS
 	
+	/**
+	 * It adds/updates the background in the argument to the panel specified. 
+	 * @param setLabel the background to be added
+	 * @param setPanel the panel where to add the background label
+	 */
 	public void updateBackground(JLabel setLabel, JPanel setPanel) {
 		gbc.insets = new Insets(0, 0, 0, 0);
 		setPanel.add(setLabel, gbc);
@@ -1252,6 +1398,12 @@ public class MainMenu {
 		mainFrame.repaint();
 	}
 	
+	/**
+	 * It adds/updates the player info in the choiceMenu, including his nickname, his pokemon and its hp.
+	 * @param p The player choosen to update the info for
+	 * @throws FontFormatException
+	 * @throws IOException
+	 */
 	public void updatePlayerInfo(Player p) throws FontFormatException, IOException {
 		if (p==Player.p1) {
 			player1Info.setText("<html>"+p.getNickname()+"<br>"+p.getCurrentPokemon().getName() + "&nbsp;Lv."+(int)p.getCurrentPokemon().getLevel() + "<br>"+(int)p.getCurrentPokemon().getHp() + " HP</html>");
@@ -1275,6 +1427,11 @@ public class MainMenu {
 		}
 	}
 	
+	/**
+	 * It applies the typical pokemon font to the text.
+	 * @param size the size of the font
+	 * @return the Font object which is the pokemon font.
+	 */
 	public Font applyPokemonFont(float size)  {
 		try {
 			String filepath = getClass().getResource("/fonts/pokemon_fire_red.ttf").getPath(); 
@@ -1290,7 +1447,10 @@ public class MainMenu {
 			return null;
 		}
 	}
-
+	
+	/**
+	 * It adds/updates the pokemon sprites for both players which can be seen in the choice menu.
+	 */
 	public void updateSprites() {
 		gbc.insets = new Insets(280, 0, 0, 500);
 		battlePanel.add(pokemon1[Player.p1.getCurrentPosition()], gbc);
@@ -1299,6 +1459,11 @@ public class MainMenu {
 		battlePanel.add(pokemon2[Player.p2.getCurrentPosition()], gbc);
 	}
 	
+	/**
+	 * It sets the sprites to the label arrays.
+	 * @see #pokemon1
+	 * @see #pokemon2
+	 */
 	public void setSprites() {
 		Player p1 = Player.p1;
 		Player p2 = Player.p2;

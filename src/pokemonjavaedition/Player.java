@@ -16,7 +16,7 @@ public class Player {
 	private String nickname;
 	
 	/**
-	 * 
+	 * The won/lost matches made in a battle. They determines the winner of the battle.
 	 */
 	private int victories, loses = 0;
 	
@@ -64,6 +64,9 @@ public class Player {
 	 */
 	private int[] otherPositions = {0, 0};
 	
+	/**
+	 * The stats of a profiles, composed by all the battles won, all the battles lost and all the battles played in general.
+	 */
 	private int gamesWon, gamesLost, gamesPlayed = 0;
 	
 	
@@ -132,22 +135,42 @@ public class Player {
 		return currentPosition;
 	}
 	
+	/**
+	 * Gets the victories made in a battle. A win is obtained by winning one of the three matches which together forms an entire battle.
+	 * @return an int value which represents the victories made
+	 */
 	public int getVictories() {
 		return victories;
 	}
 	
+	/**
+	 * Gets the total games played by a character saved as a profile in the game.
+	 * @return the games played, as an int value.
+	 */
 	public int getGamesPlayed() {
 		return gamesPlayed;
 	}
 	
+	/**
+	 * Gets the loses made in a battle. A lose is obtained by losing one of the three matches which together forms an entire battle.
+	 * @return
+	 */
 	public int getLoses() {
 		return loses;
 	}
 	
+	/**
+	 * Gets the total games won by a character saved as a profile in the game.
+	 * @return the games won, as an int value.
+	 */
 	public int getGamesWon() {
 		return gamesWon;
 	}
 	
+	/**
+	 *  Gets the total games lost by a character saved as a profile in the game.
+	 * @return the games lost, as an int value.
+	 */
 	public int getGamesLost() {
 		return gamesLost;
 	}
