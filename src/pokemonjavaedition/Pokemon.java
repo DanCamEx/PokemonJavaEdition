@@ -30,7 +30,7 @@ public class Pokemon {
 	/**
 	 * It creates an empty pokemon, useful if you want to just initialize it without giving it any information.
 	 */
-	Pokemon() {
+	public Pokemon() {
 		
 	}
 	
@@ -44,7 +44,7 @@ public class Pokemon {
 	 * @param frontSprite its front sprite image
 	 * @param backSprite its back sprite image
 	 */
-	Pokemon(String name, String type, PokeMove[] moveSet, double[] stats, double[] stages, ImageIcon frontSprite, ImageIcon backSprite){
+	public Pokemon(String name, String type, PokeMove[] moveSet, double[] stats, double[] stages, ImageIcon frontSprite, ImageIcon backSprite){
 		this.name = name;
 		this.type = type;
 		this.moveSet = moveSet;
@@ -58,7 +58,7 @@ public class Pokemon {
 	 * Gets the name of the pokemon.
 	 * @return a string with its name
 	 */
-	String getName(){
+	public String getName(){
 		return name;
 	}
 	
@@ -66,7 +66,7 @@ public class Pokemon {
 	 * Gets the level of the pokemon.
 	 * @return a double value, which is its level
 	 */
-	double getLevel() {
+	public double getLevel() {
 		return stats[0];
 	}
 	
@@ -74,7 +74,7 @@ public class Pokemon {
 	 * Gets the hp of a pokemon.
 	 * @return a double value, which is its hp
 	 */
-	double getHp() {
+	public double getHp() {
 		return stats[1];
 	}
 	
@@ -82,7 +82,7 @@ public class Pokemon {
 	 * Gets the attack of a pokemon.
 	 * @return a double value, which is its attack
 	 */
-	double getAttack() {
+	public double getAttack() {
 		return stats[2];
 	}
 	
@@ -90,7 +90,7 @@ public class Pokemon {
 	 * Gets the defense of a pokemon.
 	 * @return a double value, which is its defense
 	 */
-	double getDefense() {
+	public double getDefense() {
 		return stats[3];
 	}
 	
@@ -98,7 +98,7 @@ public class Pokemon {
 	 * Gets the speed of a pokemon.
 	 * @return a double value, which is its speed
 	 */
-	double getSpeed() {
+	public double getSpeed() {
 		return stats[4];
 	}
 	
@@ -106,7 +106,7 @@ public class Pokemon {
 	 * Gets the special stat of a pokemon.
 	 * @return a double value, which is its special stat
 	 */
-	double getSpecial() {
+	public double getSpecial() {
 		return stats[5];
 	}
 	
@@ -114,7 +114,7 @@ public class Pokemon {
 	 * Gets the attack stage of a pokemon.
 	 * @return a double value, which is its attack stage (default is 0)
 	 */
-	double getAttackStage() {
+	public double getAttackStage() {
 		return stages[0];
 	}
 	
@@ -122,7 +122,7 @@ public class Pokemon {
 	 * Gets the defense stage of a pokemon.
 	 * @return a double value, which is its defense stage (default is 0)
 	 */
-	double getDefenseStage() {
+	public double getDefenseStage() {
 		return stages[1];
 	}
 	
@@ -130,7 +130,7 @@ public class Pokemon {
 	 * Gets the special stage of a pokemon.
 	 * @return a double value, which is its special stage (default is 0)
 	 */
-	double getSpecialStage() {
+	public double getSpecialStage() {
 		return stages[2];
 	}
 	
@@ -138,7 +138,7 @@ public class Pokemon {
 	 * Gets the speed stage of a pokemon.
 	 * @return a double value, which is its speed stage (default is 0)
 	 */
-	double getSpeedStage() {
+	public double getSpeedStage() {
 		return stages[3];
 	}
 	
@@ -146,7 +146,7 @@ public class Pokemon {
 	 * Gets the first move of a pokemon.
 	 * @return a pokemove, which is the first move
 	 */
-	PokeMove getMove1() {
+	public PokeMove getMove1() {
 		return moveSet[0];
 	}
 	
@@ -154,7 +154,7 @@ public class Pokemon {
 	 * Gets the second move of a pokemon.
 	 * @return a pokemove, which is the second move in the array of the pokemon moves
 	 */
-	PokeMove getMove2() {
+	public PokeMove getMove2() {
 		return moveSet[1];	
 	}
 	
@@ -162,7 +162,7 @@ public class Pokemon {
 	 * Gets the third move of a pokemon.
 	 * @return a pokemove, which is the third move in the array of the pokemon moves
 	 */
-	PokeMove getMove3() {
+	public PokeMove getMove3() {
 		return moveSet[2];
 	}
 	
@@ -170,7 +170,7 @@ public class Pokemon {
 	 * Gets the fourth move of a pokemon.
 	 * @return a pokemove, which is the fourth move in the array of the pokemon moves
 	 */
-	PokeMove getMove4() {
+	public PokeMove getMove4() {
 		return moveSet[3];
 	}
 	
@@ -178,7 +178,7 @@ public class Pokemon {
 	 * Gets the back sprite image of the pokemon.
 	 * @return an imageIcon object, which is its back sprite
 	 */
-	ImageIcon getBackSprite() {
+	public ImageIcon getBackSprite() {
 		return backSprite;
 	}
 	
@@ -186,7 +186,7 @@ public class Pokemon {
 	 * Gets the front sprite image of the pokemon.
 	 * @return an imageIcon object, which is its front sprite
 	 */
-	ImageIcon getFrontSprite() {
+	public ImageIcon getFrontSprite() {
 		return frontSprite;
 	}
 	
@@ -194,7 +194,7 @@ public class Pokemon {
 	 * Gets the type of the pokemon
 	 * @return a string which represents the type of the pokemon (fire, water, grass ecc...)
 	 */
-	String getType() {
+	public String getType() {
 		return type;
 	}
 	

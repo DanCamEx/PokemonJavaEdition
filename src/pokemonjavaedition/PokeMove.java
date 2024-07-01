@@ -18,7 +18,7 @@ public class PokeMove {
 	 * Creates a pokemove with just his category, used for special pokemove objects like the switch.
 	 * @param category the category of a move. It can be special, physical, status or of a special type, like switch, or empty.
 	 */
-	PokeMove(String category){
+	public PokeMove(String category){
 		this.category = category;
 	}
 	
@@ -32,7 +32,7 @@ public class PokeMove {
 	 * @param statModifier the stat that a move can modify. It is empty if no stat is influenced.
 	 * @param statSign the stat sign, which can be + or -, if the stat is boosted or nerfed. It is strictly correlated to the statModifier.
 	 */
-	PokeMove(String name, String type, String category, double power, double accuracy, String statModifier, String statSign){
+	public PokeMove(String name, String type, String category, double power, double accuracy, String statModifier, String statSign){
 		this.name = name;
 		this.type = type;
 		this.category = category;
@@ -46,7 +46,7 @@ public class PokeMove {
 	 * Gets the name of a pokemon move.
 	 * @return
 	 */
-	String getName() {
+	public String getName() {
 		return name;
 	}
 	
@@ -54,7 +54,7 @@ public class PokeMove {
 	 * Gets the category of a pokemon move (physical, status, special, ecc...)
 	 * @return
 	 */
-	String getCategory() {
+	public String getCategory() {
 		return category;
 	}
 	
@@ -62,7 +62,7 @@ public class PokeMove {
 	 * Gets the power of a pokemon move, which represents its damage.
 	 * @return
 	 */
-	double getPower() {
+	public double getPower() {
 		return power;
 	}
 	
@@ -70,7 +70,7 @@ public class PokeMove {
 	 * Gets the stat that is influenced by that move. It can be empty if no stat is influenced.
 	 * @return
 	 */
-	String getStatModifier() {
+	public String getStatModifier() {
 		return statModifier;
 	}
 	
@@ -80,7 +80,7 @@ public class PokeMove {
 	 * @see #statModifier
 	 * @see #getStatModifier()
 	 */
-	String getStatSign() {
+	public String getStatSign() {
 		return statSign;
 	}
 	
@@ -88,7 +88,7 @@ public class PokeMove {
 	 * Gets the type of a pokemon move (fire, water, grass or normal).
 	 * @return
 	 */
-	String getType() {
+	public String getType() {
 		return type;
 	}
 	
@@ -96,7 +96,7 @@ public class PokeMove {
 	 * Gets the accuracy of a pokemon move, which represents his chance to be effective in battle.
 	 * @return
 	 */
-	double getAccuracy() {
+	public double getAccuracy() {
 		return accuracy;
 	}
 	
