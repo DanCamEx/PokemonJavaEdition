@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"pokemonjavaedition","l":"JPokeBattle"},{"p":"pokemonjavaedition","l":"LoadNSave"},{"p":"pokemonjavaedition","l":"MainMenu"},{"p":"pokemonjavaedition","l":"Player"},{"p":"pokemonjavaedition","l":"Pokemon"},{"p":"pokemonjavaedition","l":"PokeMove"},{"p":"pokemonjavaedition","l":"Turn"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"pokemonjavaedition","l":"Pokemon"}];updateSearchResults();

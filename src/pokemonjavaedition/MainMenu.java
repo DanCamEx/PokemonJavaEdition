@@ -145,18 +145,11 @@ public class MainMenu {
 	private JLabel profileBackgroundLabel = new JLabel(profileBackground);
 	
 	/**
-	 * An int value used to change the pokemon of Player 1 while in battle, to register the position of the pokemon to be switched with the current one.
+	 * An int value used to change the pokemon of Player 1/2 while in battle, to register the position of the pokemon to be switched with the current one.
 	 * @see #turnMenu(Player, int, boolean)
 	 * @see #choiceMenu(Player)
 	 */
-	private int chosenPosition1;
-	
-	/**
-	 * An int value used to change the pokemon of Player 2 while in battle, to register the position of the pokemon to be switched with the current one.
-	 * @see #turnMenu(Player, int, boolean)
-	 * @see #choiceMenu(Player)
-	 */
-	private int chosenPosition2;
+	private int chosenPosition1, chosenPosition2;
 	
 	/**
 	 * A value used to set the column and the raw where the components are placed in the various menus. 
