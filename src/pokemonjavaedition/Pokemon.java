@@ -228,26 +228,26 @@ public class Pokemon {
 	
 	/**
 	 * It creates a pokemon by searching it in the list created inside. 
-	 * @param pokemonName the pokemon name that needs to be created
+	 * @param pokemonName the pokemon name that needs to be created 
 	 * @return the pokemon based on the string written
 	 */
 	public static Pokemon createPokemon(String pokemonName) {
 		
 		Pokemon[] pokemonList = {
 				
-				new Pokemon("Bulbasaur", "grass", new PokeMove[]{PokeMove.vine_whip, PokeMove.growl, PokeMove.razorleaf, PokeMove.tackle}, 
-						new double[]{5, 19.5, 14.9, 14.9, 16.5, 14.5}, new double[]{0, 0, 0, 0}, 
+				new Pokemon("Bulbasaur", "grass", new PokeMove[]{PokeMove.solarbeam, PokeMove.growl, PokeMove.razorleaf, PokeMove.tackle}, 
+						new double[]{15, 38.5, 19.7, 19.7, 18.5, 24.5}, new double[]{0, 0, 0, 0}, 
 						new ImageIcon(JPokeBattle.class.getResource("/images/bulbasaurFRONT.gif")), 
 						new ImageIcon(JPokeBattle.class.getResource("/images/bulbasaurBACK.gif"))),	
 				
 				
 				new Pokemon("Charmander", "fire", new PokeMove[] {PokeMove.ember, PokeMove.growl, PokeMove.scratch, PokeMove.flamethrower}, 
-						new double[]{5, 18.9, 15.2, 14.3, 15, 16.5}, new double[]{0, 0, 0, 0}, 
+						new double[]{15, 36.7, 20.6, 17.9, 24.5, 20}, new double[]{0, 0, 0, 0}, 
 						new ImageIcon(JPokeBattle.class.getResource("/images/charmanderFRONT.gif")), 
 						new ImageIcon(JPokeBattle.class.getResource("/images/charmanderBACK.gif"))),
 				
-				new Pokemon("Squirtle", "water", new PokeMove[] {PokeMove.bubble, PokeMove.tail_whip, PokeMove.bite, PokeMove.water_gun}, 
-						new double[]{5, 19.4, 14.8, 16.5, 15, 14.3}, new double[] {0, 0, 0, 0}, 
+				new Pokemon("Squirtle", "water", new PokeMove[] {PokeMove.hydropump, PokeMove.tail_whip, PokeMove.bite, PokeMove.water_gun}, 
+						new double[]{15, 38.2, 19.4, 24.5, 17.9, 20}, new double[] {0, 0, 0, 0}, 
 						new ImageIcon(JPokeBattle.class.getResource("/images/squirtleFRONT.gif")), 
 						new ImageIcon(JPokeBattle.class.getResource("/images/squirtleBACK.gif")))
 				

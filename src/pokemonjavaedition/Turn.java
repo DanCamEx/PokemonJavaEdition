@@ -44,8 +44,17 @@ public class Turn {
 		
 		Player otherP = Player.reversePlayer(p);
 		
-		double modifiedDamage = checkStage(p.getCurrentPokemon().getAttack(), p.getCurrentPokemon().getAttackStage());
-		double modifiedDefense = checkStage(otherP.getCurrentPokemon().getDefense(), otherP.getCurrentPokemon().getDefenseStage());
+		double modifiedDamage;
+		double modifiedDefense;
+		
+		if (p.getChoice().getCategory()=="special") {
+			modifiedDamage = checkStage(p.getCurrentPokemon().getSpecial(), p.getCurrentPokemon().getSpecialStage());
+			modifiedDefense = checkStage(otherP.getCurrentPokemon().getSpecial(), otherP.getCurrentPokemon().getSpecialStage());
+		}
+		else {
+			modifiedDamage = checkStage(p.getCurrentPokemon().getAttack(), p.getCurrentPokemon().getAttackStage());
+			modifiedDefense = checkStage(otherP.getCurrentPokemon().getDefense(), otherP.getCurrentPokemon().getDefenseStage());
+		}
 		
 		double finalDamage = (p.getCurrentPokemon().getLevel() * 2 / 5 + 2 ) * p.getChoice().getPower() * modifiedDamage / modifiedDefense / 50;
 		if(finalDamage > 997) {
