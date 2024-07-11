@@ -2,6 +2,7 @@ Pokémon Java Version. created by Daniele Camelin and Simone Bovolosco
 Questo gioco simula una battaglia tipica di Pokémon riprendendone le sue meccaniche!
 
 ISTRUZIONI
+
 Questo repository contiene i file sorgente del gioco. Per essere eseguito è necessario pullare il progetto in un git all'interno di Eclipse. 
 Non è prevista una build dotata di un jre eseguibile.
 
