@@ -962,10 +962,10 @@ public class MainMenu {
 				fightButton.setEnabled(false);
 				changePokemonButton.setEnabled(false);
 				Player otherP = Player.reversePlayer(p);
+				p.setLoses(p.getLoses()+1);
+				otherP.setVictories(otherP.getVictories()+1);
 				
 				if (battleCounter!=3) {
-					p.setLoses(p.getLoses()+1);
-					otherP.setVictories(otherP.getVictories()+1);
 					Pokemon.resetTeam(p);
 					finishMenu("match", otherP, p);
 				}	

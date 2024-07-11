@@ -1,4 +1,0 @@
-Nickname: Player1
-Games played: 1
-Wins: 0
-Loses: 1
