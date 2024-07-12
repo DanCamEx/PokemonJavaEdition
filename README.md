@@ -1,4 +1,4 @@
-Pokémon Java Version. created by Daniele Camelin and Simone Bovolosco
+Pokémon Java Version. created by Daniele Camelin and Simone Bovolenta
 Questo gioco simula una battaglia tipica di Pokémon riprendendone le sue meccaniche!
 
 ISTRUZIONI
